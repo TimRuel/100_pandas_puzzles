@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>100 pandas puzzles</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="100_pandas_puzzles_TEMPLATE_files/libs/clipboard/clipboard.min.js"></script>
+<script src="100_pandas_puzzles_TEMPLATE_files/libs/quarto-html/quarto.js"></script>
+<script src="100_pandas_puzzles_TEMPLATE_files/libs/quarto-html/popper.min.js"></script>
+<script src="100_pandas_puzzles_TEMPLATE_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="100_pandas_puzzles_TEMPLATE_files/libs/quarto-html/anchor.min.js"></script>
+<link href="100_pandas_puzzles_TEMPLATE_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="100_pandas_puzzles_TEMPLATE_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="100_pandas_puzzles_TEMPLATE_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="100_pandas_puzzles_TEMPLATE_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="100_pandas_puzzles_TEMPLATE_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">100 pandas puzzles</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Inspired by <a href="https://github.com/rougier/numpy-100">100 Numpy exercises</a>, here are 100* short puzzles for testing your knowledge of <a href="http://pandas.pydata.org/">pandas’</a> power.</p>
+<p>Since pandas is a large library with many different specialist features and functions, these exercises focus mainly on the fundamentals of manipulating data (indexing, grouping, aggregating, cleaning), making use of the core DataFrame and Series objects.</p>
+<p>Many of the exercises here are straight-forward in that the solutions require no more than a few lines of code (in pandas or NumPy… don’t go using pure Python or Cython!). Choosing the right methods and following best practices is the underlying goal.</p>
+<p>The exercises are loosely divided in sections. Each section has a difficulty rating; these ratings are subjective, of course, but should be a seen as a rough guide as to how inventive the required solution is.</p>
+<p>If you’re just starting out with pandas and you are looking for some other resources, the official documentation is very extensive. In particular, some good places to get a broader overview of pandas are…</p>
+<p>- <a href="http://pandas.pydata.org/pandas-docs/stable/10min.html">10 minutes to pandas</a></p>
+<p>- <a href="http://pandas.pydata.org/pandas-docs/stable/basics.html">pandas basics</a></p>
+<p>- <a href="http://pandas.pydata.org/pandas-docs/stable/tutorials.html">tutorials</a></p>
+<p>- <a href="http://pandas.pydata.org/pandas-docs/stable/cookbook.html#cookbook">cookbook and idioms</a></p>
+<p>Enjoy the puzzles!</p>
+<p>* <em>the list of exercises is not yet complete! Pull requests or suggestions for additional exercises, corrections and improvements are welcomed.</em></p>
+<section id="importing-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="importing-pandas">Importing pandas</h2>
+<section id="getting-started-and-checking-your-pandas-setup" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started-and-checking-your-pandas-setup">Getting started and checking your pandas setup</h3>
+<p>Difficulty: <em>easy</em></p>
+<p><strong>1.</strong> Import pandas under the alias <code>pd</code>.</p>
+<p><strong>2.</strong> Print the version of pandas that has been imported.</p>
+<p><strong>3.</strong> Print out all the <em>version</em> information of the libraries that are required by the pandas library.</p>
+</section>
+</section>
+<section id="dataframe-basics" class="level2">
+<h2 class="anchored" data-anchor-id="dataframe-basics">DataFrame basics</h2>
+<section id="a-few-of-the-fundamental-routines-for-selecting-sorting-adding-and-aggregating-data-in-dataframes" class="level3">
+<h3 class="anchored" data-anchor-id="a-few-of-the-fundamental-routines-for-selecting-sorting-adding-and-aggregating-data-in-dataframes">A few of the fundamental routines for selecting, sorting, adding and aggregating data in DataFrames</h3>
+<p>Difficulty: <em>easy</em></p>
+<p>Note: remember to import numpy using:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Consider the following Python dictionary <code>data</code> and Python list <code>labels</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'animal'</span>: [<span class="st">'cat'</span>, <span class="st">'cat'</span>, <span class="st">'snake'</span>, <span class="st">'dog'</span>, <span class="st">'dog'</span>, <span class="st">'cat'</span>, <span class="st">'snake'</span>, <span class="st">'cat'</span>, <span class="st">'dog'</span>, <span class="st">'dog'</span>],</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">'age'</span>: [<span class="fl">2.5</span>, <span class="dv">3</span>, <span class="fl">0.5</span>, np.nan, <span class="dv">5</span>, <span class="dv">2</span>, <span class="fl">4.5</span>, np.nan, <span class="dv">7</span>, <span class="dv">3</span>],</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'visits'</span>: [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'priority'</span>: [<span class="st">'yes'</span>, <span class="st">'yes'</span>, <span class="st">'no'</span>, <span class="st">'yes'</span>, <span class="st">'no'</span>, <span class="st">'no'</span>, <span class="st">'no'</span>, <span class="st">'yes'</span>, <span class="st">'no'</span>, <span class="st">'no'</span>]}</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>, <span class="st">'e'</span>, <span class="st">'f'</span>, <span class="st">'g'</span>, <span class="st">'h'</span>, <span class="st">'i'</span>, <span class="st">'j'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(This is just some meaningless data I made up with the theme of animals and trips to a vet.)</p>
+<p><strong>4.</strong> Create a DataFrame <code>df</code> from this dictionary <code>data</code> which has the index <code>labels</code>.</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'animal'</span>: [<span class="st">'cat'</span>, <span class="st">'cat'</span>, <span class="st">'snake'</span>, <span class="st">'dog'</span>, <span class="st">'dog'</span>, <span class="st">'cat'</span>, <span class="st">'snake'</span>, <span class="st">'cat'</span>, <span class="st">'dog'</span>, <span class="st">'dog'</span>],</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'age'</span>: [<span class="fl">2.5</span>, <span class="dv">3</span>, <span class="fl">0.5</span>, np.nan, <span class="dv">5</span>, <span class="dv">2</span>, <span class="fl">4.5</span>, np.nan, <span class="dv">7</span>, <span class="dv">3</span>],</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'visits'</span>: [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'priority'</span>: [<span class="st">'yes'</span>, <span class="st">'yes'</span>, <span class="st">'no'</span>, <span class="st">'yes'</span>, <span class="st">'no'</span>, <span class="st">'no'</span>, <span class="st">'no'</span>, <span class="st">'yes'</span>, <span class="st">'no'</span>, <span class="st">'no'</span>]}</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>, <span class="st">'e'</span>, <span class="st">'f'</span>, <span class="st">'g'</span>, <span class="st">'h'</span>, <span class="st">'i'</span>, <span class="st">'j'</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> <span class="co"># (complete this line of code)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>5.</strong> Display a summary of the basic information about this DataFrame and its data (<em>hint: there is a single method that can be called on the DataFrame</em>).</p>
+<p><strong>6.</strong> Return the first 3 rows of the DataFrame <code>df</code>.</p>
+<p><strong>7.</strong> Select just the ‘animal’ and ‘age’ columns from the DataFrame <code>df</code>.</p>
+<p><strong>8.</strong> Select the data in rows <code>[3, 4, 8]</code> <em>and</em> in columns <code>['animal', 'age']</code>.</p>
+<p><strong>9.</strong> Select only the rows where the number of visits is greater than 3.</p>
+<p><strong>10.</strong> Select the rows where the age is missing, i.e.&nbsp;it is <code>NaN</code>.</p>
+<p><strong>11.</strong> Select the rows where the animal is a cat *and* the age is less than 3.</p>
+<p><strong>12.</strong> Select the rows the age is between 2 and 4 (inclusive).</p>
+<p><strong>13.</strong> Change the age in row ‘f’ to 1.5.</p>
+<p><strong>14.</strong> Calculate the sum of all visits in <code>df</code> (i.e.&nbsp;find the total number of visits).</p>
+<p><strong>15.</strong> Calculate the mean age for each different animal in <code>df</code>.</p>
+<p><strong>16.</strong> Append a new row ‘k’ to <code>df</code> with your choice of values for each column. Then delete that row to return the original DataFrame.</p>
+<p><strong>17.</strong> Count the number of each type of animal in <code>df</code>.</p>
+<p><strong>18.</strong> Sort <code>df</code> first by the values in the ‘age’ in *decending* order, then by the value in the ‘visits’ column in *ascending* order (so row <code>i</code> should be first, and row <code>d</code> should be last).</p>
+<p><strong>19.</strong> The ‘priority’ column contains the values ‘yes’ and ‘no’. Replace this column with a column of boolean values: ‘yes’ should be <code>True</code> and ‘no’ should be <code>False</code>.</p>
+<p><strong>20.</strong> In the ‘animal’ column, change the ‘snake’ entries to ‘python’.</p>
+<p><strong>21.</strong> For each animal type and each number of visits, find the mean age. In other words, each row is an animal, each column is a number of visits and the values are the mean ages (*hint: use a pivot table*).</p>
+</section>
+</section>
+<section id="dataframes-beyond-the-basics" class="level2">
+<h2 class="anchored" data-anchor-id="dataframes-beyond-the-basics">DataFrames: beyond the basics</h2>
+<section id="slightly-trickier-you-may-need-to-combine-two-or-more-methods-to-get-the-right-answer" class="level3">
+<h3 class="anchored" data-anchor-id="slightly-trickier-you-may-need-to-combine-two-or-more-methods-to-get-the-right-answer">Slightly trickier: you may need to combine two or more methods to get the right answer</h3>
+<p>Difficulty: <em>medium</em></p>
+<p>The previous section was tour through some basic but essential DataFrame operations. Below are some ways that you might need to cut your data, but for which there is no single “out of the box” method.</p>
+<p><strong>22.</strong> You have a DataFrame <code>df</code> with a column ‘A’ of integers. For example:</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'A'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">7</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How do you filter out rows which contain the same integer as the row immediately above?</p>
+<p>You should be left with a column containing the following values:</p>
+<p><code>1, 2, 3, 4, 5, 6, 7</code></p>
+<p><strong>23.</strong> Given a DataFrame of numeric values, say</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(np.random.random(size <span class="op">=</span> (<span class="dv">5</span>, <span class="dv">3</span>))) <span class="co"># a 5x3 frame of float values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>how do you subtract the row mean from each element in the row?</p>
+<p><strong>24.</strong> Suppose you have a DataFrame with 10 columns of real numbers, for example:</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(np.random.random(size <span class="op">=</span> (<span class="dv">5</span>, <span class="dv">10</span>)), columns <span class="op">=</span> <span class="bu">list</span>(<span class="st">'abcdefghij'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Which column of numbers has the smallest sum? Return that column’s label.</p>
+<p><strong>25.</strong> How do you count how many unique rows a DataFrame has (i.e.&nbsp;ignore all rows that are duplicates)? As input, use a DataFrame of zeros and ones with 10 rows and 3 columns.</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(np.random.randint(<span class="dv">0</span>, <span class="dv">2</span>, size <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The next three puzzles are slightly harder.</p>
+<p><strong>26.</strong> In the cell below, you have a DataFrame <code>df</code> that consists of 10 columns of floating-point numbers. Exactly 5 entries in each row are NaN values.</p>
+<p>For each row of the DataFrame, find the <em>column</em> which contains the <em>third</em> NaN value.</p>
+<p>You should return a Series of column labels: <code>e, c, d, h, d</code></p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nan <span class="op">=</span> np.nan</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [[<span class="fl">0.04</span>, nan, nan, <span class="fl">0.25</span>, nan, <span class="fl">0.43</span>, <span class="fl">0.71</span>, <span class="fl">0.51</span>, nan, nan],</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        [nan, nan, nan, <span class="fl">0.04</span>, <span class="fl">0.76</span>, nan, nan, <span class="fl">0.67</span>, <span class="fl">0.76</span>, <span class="fl">0.16</span>],</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        [nan, nan, <span class="fl">0.5</span> , nan, <span class="fl">0.31</span>, <span class="fl">0.4</span> , nan, nan, <span class="fl">0.24</span>, <span class="fl">0.01</span>],</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        [<span class="fl">0.49</span>, nan, nan, <span class="fl">0.62</span>, <span class="fl">0.73</span>, <span class="fl">0.26</span>, <span class="fl">0.85</span>, nan, nan, nan],</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        [nan, nan, <span class="fl">0.41</span>, nan, <span class="fl">0.05</span>, nan, <span class="fl">0.61</span>, nan, <span class="fl">0.48</span>, <span class="fl">0.68</span>]]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> <span class="bu">list</span>(<span class="st">'abcdefghij'</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data, columns <span class="op">=</span> columns)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># write a solution to the question here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>27.</strong> A DataFrame has a column of groups ‘grps’ and and column of integer values ‘vals’:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'grps'</span>: <span class="bu">list</span>(<span class="st">'aaabbcaabcccbbc'</span>),</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'vals'</span>: [<span class="dv">12</span>, <span class="dv">345</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">45</span>, <span class="dv">14</span>, <span class="dv">4</span>, <span class="dv">52</span>, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                            <span class="dv">54</span>, <span class="dv">23</span>, <span class="dv">235</span>, <span class="dv">21</span>, <span class="dv">57</span>, <span class="dv">3</span>, <span class="dv">87</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For each <em>group</em>, find the sum of the three greatest values. You should end up with the answer as follows:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a> grps</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a> a    <span class="dv">409</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a> b    <span class="dv">156</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a> c    <span class="dv">345</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'grps'</span>: <span class="bu">list</span>(<span class="st">'aaabbcaabcccbbc'</span>),</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'vals'</span>: [<span class="dv">12</span>, <span class="dv">345</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">45</span>, <span class="dv">14</span>, <span class="dv">4</span>, <span class="dv">52</span>, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                            <span class="dv">54</span>, <span class="dv">23</span>, <span class="dv">235</span>, <span class="dv">21</span>, <span class="dv">57</span>, <span class="dv">3</span>, <span class="dv">87</span>]})</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># write a solution to the question here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>28.</strong> The DataFrame <code>df</code> constructed below has two integer columns ‘A’ and ‘B’. The values in ‘A’ are between 1 and 100 (inclusive).</p>
+<p>For each group of 10 consecutive integers in ‘A’ (i.e.&nbsp;<code>(0, 10]</code>, <code>(10, 20]</code>, …), calculate the sum of the corresponding values in column ‘B’.</p>
+<p>The answer should be a Series as follows:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>A</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">0</span>, <span class="dv">10</span>] <span class="dv">635</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>(<span class="dv">10</span>, <span class="dv">20</span>] <span class="dv">360</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>(<span class="dv">20</span>, <span class="dv">30</span>] <span class="dv">315</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>(<span class="dv">30</span>, <span class="dv">40</span>] <span class="dv">306</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>(<span class="dv">40</span>, <span class="dv">50</span>] <span class="dv">750</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>(<span class="dv">50</span>, <span class="dv">60</span>] <span class="dv">284</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>(<span class="dv">60</span>, <span class="dv">70</span>] <span class="dv">424</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>(<span class="dv">70</span>, <span class="dv">80</span>] <span class="dv">526</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>(<span class="dv">80</span>, <span class="dv">90</span>] <span class="dv">835</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>(<span class="dv">90</span>, <span class="dv">100</span>] <span class="dv">852</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(np.random.RandomState(<span class="dv">8765</span>).randint(<span class="dv">1</span>, <span class="dv">101</span>, size <span class="op">=</span> (<span class="dv">100</span>, <span class="dv">2</span>)), columns <span class="op">=</span> [<span class="st">"A"</span>, <span class="st">"B"</span>])</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># write a solution to the question here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="dataframes-harder-problems" class="level2">
+<h2 class="anchored" data-anchor-id="dataframes-harder-problems">DataFrames: harder problems</h2>
+<section id="these-might-require-a-bit-of-thinking-outside-the-box" class="level3">
+<h3 class="anchored" data-anchor-id="these-might-require-a-bit-of-thinking-outside-the-box">These might require a bit of thinking outside the box…</h3>
+<p>…but all are solvable using just the usual pandas/NumPy methods (and so avoid using explicit <code>for</code> loops).</p>
+<p>Difficulty: <em>hard</em></p>
+<p><strong>29.</strong> Consider a DataFrame <code>df</code> where there is an integer column ‘X’:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'X'</span>: [<span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">4</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For each value, count the difference back to the previous zero (or the start of the Series, whichever is closer). These values should therefore be</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Make this a new column ‘Y’.</p>
+<p><strong>30.</strong> Consider the DataFrame constructed below which contains rows and columns of numerical data.</p>
+<p>Create a list of the column-row index locations of the 3 largest values in this DataFrame. In this case, the answer should be:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>[(<span class="dv">5</span>, <span class="dv">7</span>), (<span class="dv">6</span>, <span class="dv">4</span>), (<span class="dv">2</span>, <span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(np.random.RandomState(<span class="dv">30</span>).randint(<span class="dv">1</span>, <span class="dv">101</span>, size<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>31.</strong> You are given the DataFrame below with a column of group IDs, ‘grps’, and a column of corresponding integer values, ‘vals’.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"vals"</span>: np.random.RandomState(<span class="dv">31</span>).randint(<span class="op">-</span><span class="dv">30</span>, <span class="dv">30</span>, size<span class="op">=</span><span class="dv">15</span>),</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"grps"</span>: np.random.RandomState(<span class="dv">31</span>).choice([<span class="st">"A"</span>, <span class="st">"B"</span>], <span class="dv">15</span>)})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Create a new column ‘patched_values’ which contains the same values as the ‘vals’ any negative values in ‘vals’ with the group mean:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>  vals grps patched_vals</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>  <span class="op">-</span><span class="dv">12</span>    A         <span class="fl">13.6</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>   <span class="op">-</span><span class="dv">7</span>    B         <span class="fl">28.0</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="op">-</span><span class="dv">14</span>    A         <span class="fl">13.6</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>    <span class="dv">4</span>    A          <span class="fl">4.0</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>   <span class="op">-</span><span class="dv">7</span>    A         <span class="fl">13.6</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>   <span class="dv">28</span>    B         <span class="fl">28.0</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>   <span class="op">-</span><span class="dv">2</span>    A         <span class="fl">13.6</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>   <span class="op">-</span><span class="dv">1</span>    A         <span class="fl">13.6</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>    <span class="dv">8</span>    A          <span class="fl">8.0</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>   <span class="op">-</span><span class="dv">2</span>    B         <span class="fl">28.0</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>  <span class="dv">28</span>    A         <span class="fl">28.0</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span>  <span class="dv">12</span>    A         <span class="fl">12.0</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span>  <span class="dv">16</span>    A         <span class="fl">16.0</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="op">-</span><span class="dv">24</span>    A         <span class="fl">13.6</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span> <span class="op">-</span><span class="dv">12</span>    A         <span class="fl">13.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>32.</strong> Implement a rolling mean over groups with window size 3, which ignores NaN value. For example consider the following DataFrame:</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'group'</span>: <span class="bu">list</span>(<span class="st">'aabbabbbabab'</span>),</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'value'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, np.nan, <span class="dv">2</span>, <span class="dv">3</span>, np.nan, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>, np.nan, <span class="dv">8</span>]})</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The goal is to compute the Series:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>   <span class="fl">1.000000</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>   <span class="fl">1.500000</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>   <span class="fl">3.000000</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>   <span class="fl">3.000000</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>   <span class="fl">1.666667</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>   <span class="fl">3.000000</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>   <span class="fl">3.000000</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>   <span class="fl">2.000000</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>   <span class="fl">3.666667</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>   <span class="fl">2.000000</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>  <span class="fl">4.500000</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span>  <span class="fl">4.000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>E.g. the first window of size three for group ‘b’ has values 3.0, NaN and 3.0 and occurs at row index 5. Instead of being NaN the value in the new column at this row index should be 3.0 (just the two non-NaN values are used to compute the mean (3+3)/2)</p>
+</section>
+</section>
+<section id="series-and-datetimeindex" class="level2">
+<h2 class="anchored" data-anchor-id="series-and-datetimeindex">Series and DatetimeIndex</h2>
+<section id="exercises-for-creating-and-manipulating-series-with-datetime-data" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-for-creating-and-manipulating-series-with-datetime-data">Exercises for creating and manipulating Series with datetime data</h3>
+<p>Difficulty: <em>easy/medium</em></p>
+<p>pandas is fantastic for working with dates and times. These puzzles explore some of this functionality.</p>
+<p><strong>33.</strong> Create a DatetimeIndex that contains each business day of 2015 and use it to index a Series of random numbers. Let’s call this Series <code>s</code>.</p>
+<p><strong>34.</strong> Find the sum of the values in <code>s</code> for every Wednesday.</p>
+<p><strong>35.</strong> For each calendar month in <code>s</code>, find the mean of values.</p>
+<p><strong>36.</strong> For each group of four consecutive calendar months in <code>s</code>, find the date on which the highest value occurred.</p>
+<p><strong>37.</strong> Create a DateTimeIndex consisting of the third Thursday in each month for the years 2015 and 2016.</p>
+</section>
+</section>
+<section id="cleaning-data" class="level2">
+<h2 class="anchored" data-anchor-id="cleaning-data">Cleaning Data</h2>
+<section id="making-a-dataframe-easier-to-work-with" class="level3">
+<h3 class="anchored" data-anchor-id="making-a-dataframe-easier-to-work-with">Making a DataFrame easier to work with</h3>
+<p>Difficulty: <em>easy/medium</em></p>
+<p>It happens all the time: someone gives you data containing malformed strings, Python, lists and missing data. How do you tidy it up so you can get on with the analysis?</p>
+<p>Take this monstrosity as the DataFrame to use in the following puzzles:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'From_To'</span>: [<span class="st">'LoNDon_paris'</span>, <span class="st">'MAdrid_miLAN'</span>, <span class="st">'londON_StockhOlm'</span>,                                <span class="st">'Budapest_PaRis'</span>, <span class="st">'Brussels_londOn'</span>],</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'FlightNumber'</span>: [<span class="dv">10045</span>, np.nan, <span class="dv">10065</span>, np.nan, <span class="dv">10085</span>],</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'RecentDelays'</span>: [[<span class="dv">23</span>, <span class="dv">47</span>], [], [<span class="dv">24</span>, <span class="dv">43</span>, <span class="dv">87</span>], [<span class="dv">13</span>], [<span class="dv">67</span>, <span class="dv">32</span>]],</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'Airline'</span>: [<span class="st">'KLM(!)'</span>, <span class="st">'\&lt;Air France\&gt; (12)'</span>, </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'(British Airways. )'</span>, <span class="st">'12. Air France'</span>, <span class="st">'"Swiss Air"'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Formatted, it looks like this:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>           From_To   FlightNumber  RecentDelays             Airline</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>     LoNDon_paris        <span class="fl">10045.0</span>      [<span class="dv">23</span>, <span class="dv">47</span>]              KLM(<span class="op">!</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>     MAdrid_miLAN            NaN            []    (<span class="dv">12</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> londON_StockhOlm        <span class="fl">10065.0</span>  [<span class="dv">24</span>, <span class="dv">43</span>, <span class="dv">87</span>] (British Airways. )</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>   Budapest_PaRis            NaN          [<span class="dv">13</span>]      <span class="fl">12.</span> Air France</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>  Brussels_londOn        <span class="fl">10085.0</span>      [<span class="dv">67</span>, <span class="dv">32</span>]         <span class="st">"Swiss Air"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(It’s some flight data I made up; it’s not meant to be accurate in any way.)</p>
+<p><strong>38.</strong> Some values in the the <strong>FlightNumber</strong> column are missing (they are <code>NaN</code>). These numbers are meant to increase by 10 with each row so 10055 and 10075 need to be put in place. Modify <code>df</code> to fill in these missing numbers and make the column an integer column (instead of a float column).</p>
+<p><strong>39.</strong> The <strong>From_To</strong> column would be better as two separate columns! Split each string on the underscore delimiter <code>_</code> to give a new temporary DataFrame called ‘temp’ with the correct values. Assign the correct column names ‘From’ and ‘To’ to this temporary DataFrame.</p>
+<p><strong>40.</strong> Notice how the capitalisation of the city names is all mixed up in this temporary DataFrame ‘temp’. Standardise the strings so that only the first letter is uppercase (e.g.&nbsp;“londON” should become “London”.)</p>
+<p><strong>41.</strong> Delete the <strong>From_To</strong> column from <code>df</code> and attach the temporary DataFrame ‘temp’ from the previous questions.</p>
+<p><strong>42</strong>. In the <strong>Airline</strong> column, you can see some extra puctuation and symbols have appeared around the airline names. Pull out just the airline name. E.g. <code>'(British Airways. )'</code> should become <code>'British Airways'</code>.</p>
+<p><strong>43</strong>. In the RecentDelays column, the values have been entered into the DataFrame as a list. We would like each first value in its own column, each second value in its own column, and so on. If there isn’t an Nth value, the value should be NaN.</p>
+<p>Expand the Series of lists into a DataFrame named <code>delays</code>, rename the columns <code>delay_1</code>, <code>delay_2</code>, etc. and replace the unwanted RecentDelays column in <code>df</code> with <code>delays</code>.</p>
+<p>The DataFrame should look much better now.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>   FlightNumber          Airline      From         To  delay_1  delay_2  delay_3</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>         <span class="dv">10045</span>              KLM    London      Paris     <span class="fl">23.0</span>     <span class="fl">47.0</span>      NaN</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>         <span class="dv">10055</span>       Air France    Madrid      Milan      NaN      NaN      NaN</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>         <span class="dv">10065</span>  British Airways    London  Stockholm     <span class="fl">24.0</span>     <span class="fl">43.0</span>     <span class="fl">87.0</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>         <span class="dv">10075</span>       Air France  Budapest      Paris     <span class="fl">13.0</span>      NaN      NaN</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>         <span class="dv">10085</span>        Swiss Air  Brussels     London     <span class="fl">67.0</span>     <span class="fl">32.0</span>      NaN</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="using-multiindexes" class="level2">
+<h2 class="anchored" data-anchor-id="using-multiindexes">Using MultiIndexes</h2>
+<section id="go-beyond-flat-dataframes-with-additional-index-levels" class="level3">
+<h3 class="anchored" data-anchor-id="go-beyond-flat-dataframes-with-additional-index-levels">Go beyond flat DataFrames with additional index levels</h3>
+<p>Difficulty: <em>medium</em></p>
+<p>Previous exercises have seen us analysing data from DataFrames equipped with a single index level. However, pandas also gives you the possibilty of indexing your data using *multiple* levels. This is very much like adding new dimensions to a Series or a DataFrame. For example, a Series is 1D, but by using a MultiIndex with 2 levels we gain of much the same functionality as a 2D DataFrame.</p>
+<p>The set of puzzles below explores how you might use multiple index levels to enhance data analysis.</p>
+<p>To warm up, we’ll look make a Series with two index levels.</p>
+<p><strong>44</strong>. Given the lists <code>letters = ['A', 'B', 'C']</code> and <code>numbers = list(range(10))</code>, construct a MultiIndex object from the product of the two lists. Use it to index a Series of random numbers. Call this Series <code>s</code>.</p>
+<p><strong>45.</strong> Check the index of <code>s</code> is lexicographically sorted (this is a necessary proprty for indexing to work correctly with a MultiIndex).</p>
+<p><strong>46</strong>. Select the labels <code>1</code>, <code>3</code> and <code>6</code> from the second level of the MultiIndexed Series.</p>
+<p><strong>47</strong>. Slice the Series <code>s</code>; slice up to label ‘B’ for the first level and from label 5 onwards for the second level.</p>
+<p><strong>48</strong>. Sum the values in <code>s</code> for each label in the first level (you should have Series giving you a total for labels A, B and C).</p>
+<p><strong>49</strong>. Suppose that <code>sum()</code> (and other methods) did not accept a <code>level</code> keyword argument. How else could you perform the equivalent of <code>s.sum(level=1)</code>?</p>
+<p><strong>50</strong>. Exchange the levels of the MultiIndex so we have an index of the form (letters, numbers). Is this new Series properly lexsorted? If not, sort it.</p>
+</section>
+</section>
+<section id="minesweeper" class="level2">
+<h2 class="anchored" data-anchor-id="minesweeper">Minesweeper</h2>
+<section id="generate-the-numbers-for-safe-squares-in-a-minesweeper-grid" class="level3">
+<h3 class="anchored" data-anchor-id="generate-the-numbers-for-safe-squares-in-a-minesweeper-grid">Generate the numbers for safe squares in a Minesweeper grid</h3>
+<p>Difficulty: <em>medium</em> to <em>hard</em></p>
+<p>If you’ve ever used an older version of Windows, there’s a good chance you’ve played with <a href="https://en.wikipedia.org/wiki/Minesweeper_(video_game)">Minesweeper</a>.</p>
+<p>If you’re not familiar with the game, imagine a grid of squares: some of these squares conceal a mine. If you click on a mine, you lose instantly. If you click on a safe square, you reveal a number telling you how many mines are found in the squares that are immediately adjacent. The aim of the game is to uncover all squares in the grid that do not contain a mine.</p>
+<p>In this section, we’ll make a DataFrame that contains the necessary data for a game of Minesweeper: coordinates of the squares, whether the square contains a mine and the number of mines found on adjacent squares.</p>
+<p><strong>51</strong>. Let’s suppose we’re playing Minesweeper on a 5 by 4 grid, i.e.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To begin, generate a DataFrame <code>df</code> with two columns, <code>'x'</code> and <code>'y'</code> containing every coordinate for this grid. That is, the DataFrame should start:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>   x  y</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>  <span class="dv">0</span>  <span class="dv">0</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  <span class="dv">0</span>  <span class="dv">1</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="dv">0</span>  <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>52</strong>. For this DataFrame <code>df</code>, create a new column of zeros (safe) and ones (mine). The probability of a mine occuring at each location should be 0.4.</p>
+<p><strong>53</strong>. Now create a new column for this DataFrame called <code>'adjacent'</code>. This column should contain the number of mines found on adjacent squares in the grid.</p>
+<p>(E.g. for the first row, which is the entry for the coordinate <code>(0, 0)</code>, count how many mines are found on the coordinates <code>(0, 1)</code>, <code>(1, 0)</code> and <code>(1, 1)</code>.)</p>
+<p><strong>54</strong>. For rows of the DataFrame that contain a mine, set the value in the <code>'adjacent'</code> column to NaN.</p>
+<p><strong>55</strong>. Finally, convert the DataFrame to grid of the adjacent mine counts: columns are the <code>x</code> coordinate, rows are the <code>y</code> coordinate.</p>
+</section>
+</section>
+<section id="plotting" class="level2">
+<h2 class="anchored" data-anchor-id="plotting">Plotting</h2>
+<section id="visualize-trends-and-patterns-in-data" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-trends-and-patterns-in-data">Visualize trends and patterns in data</h3>
+<p>Difficulty: <em>medium</em></p>
+<p>To really get a good understanding of the data contained in your DataFrame, it is often essential to create plots: if you’re lucky, trends and anomalies will jump right out at you. This functionality is baked into pandas and the puzzles below explore some of what’s possible with the library.</p>
+<p><strong>56.</strong> Pandas is highly integrated with the plotting library matplotlib, and makes plotting DataFrames very user-friendly! Plotting in a notebook environment usually makes use of the following boilerplate:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">'ggplot'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>matplotlib is the plotting library which pandas’ plotting functionality is built upon, and it is usually aliased to <code>plt</code>.</p>
+<p><code>%matplotlib inline</code> tells the notebook to show plots inline, instead of creating them in a separate window.</p>
+<p><code>plt.style.use('ggplot')</code> is a style theme that most people find agreeable, based upon the styling of R’s ggplot package.</p>
+<p>For starters, make a scatter plot of this random data, but use black X’s instead of the default markers.</p>
+<p><code>df = pd.DataFrame({"xs":[1, 5, 2, 8, 1], "ys":[4, 2, 1, 9, 6]})</code></p>
+<p>Consult the <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.plot.html">documentation</a> if you get stuck!</p>
+<p><strong>57.</strong> Columns in your DataFrame can also be used to modify colors and sizes. Bill has been keeping track of his performance at work over time, as well as how good he was feeling that day, and whether he had a cup of coffee in the morning. Make a plot which incorporates all four features of this DataFrame.</p>
+<p>(Hint: If you’re having trouble seeing the plot, try multiplying the Series which you choose to represent size by 10 or more)</p>
+<p><em>The chart doesn’t have to be pretty: this isn’t a course in data viz!</em></p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"productivity"</span>:[<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">9</span>],</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"hours_in"</span>    :[<span class="dv">1</span>,<span class="dv">9</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">2</span>,<span class="dv">9</span>,<span class="dv">1</span>,<span class="dv">7</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>],</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"happiness"</span>   :[<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>],</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"caffienated"</span> :[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>58.</strong> What if we want to plot multiple things? Pandas allows you to pass in a matplotlib *Axis* object for plots, and plots will also return an Axis object.</p>
+<p>Make a bar plot of monthly revenue with a line plot of monthly advertising spending (numbers in millions)</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"revenue"</span>:[<span class="dv">57</span>,<span class="dv">68</span>,<span class="dv">63</span>,<span class="dv">71</span>,<span class="dv">72</span>,<span class="dv">90</span>,<span class="dv">80</span>,<span class="dv">62</span>,<span class="dv">59</span>,<span class="dv">51</span>,<span class="dv">47</span>,<span class="dv">52</span>],</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"advertising"</span>:[<span class="fl">2.1</span>,<span class="fl">1.9</span>,<span class="fl">2.7</span>,<span class="fl">3.0</span>,<span class="fl">3.6</span>,<span class="fl">3.2</span>,<span class="fl">2.7</span>,<span class="fl">2.4</span>,<span class="fl">1.8</span>,<span class="fl">1.6</span>,<span class="fl">1.3</span>,<span class="fl">1.9</span>],</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"month"</span>:<span class="bu">range</span>(<span class="dv">12</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we’re finally ready to create a candlestick chart, which is a very common tool used to analyze stock price data. A candlestick chart shows the opening, closing, highest, and lowest price for a stock during a time window. The color of the “candle” (the thick part of the bar) is green if the stock closed above its opening price, or red if below.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/candle.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Candlestick Example</figcaption><p></p>
+</figure>
+</div>
+<p>This was initially designed to be a pandas plotting challenge, but it just so happens that this type of plot is just not feasible using pandas’ methods. If you are unfamiliar with matplotlib, we have provided a function that will plot the chart for you so long as you can use pandas to get the data into the correct format.</p>
+<p>Your first step should be to get the data in the correct format using pandas’ time-series grouping function. We would like each candle to represent an hour’s worth of data. You can write your own aggregation function which returns the open/high/low/close, but pandas has a built-in which also does this.</p>
+<p>The below cell contains helper functions. Call <code>day_stock_data()</code> to generate a DataFrame containing the prices a hypothetical stock sold for, and the time the sale occurred. Call <code>plot_candlestick(df)</code> on your properly aggregated and formatted stock data to print the candlestick chart.</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> float_to_time(x):</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">str</span>(<span class="bu">int</span>(x)) <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">int</span>(x<span class="op">%</span><span class="dv">1</span> <span class="op">*</span> <span class="dv">60</span>)).zfill(<span class="dv">2</span>) <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">int</span>(x<span class="op">*</span><span class="dv">60</span> <span class="op">%</span> <span class="dv">1</span> <span class="op">*</span> <span class="dv">60</span>)).zfill(<span class="dv">2</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> day_stock_data():</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#NYSE is open from 9:30 to 4:00</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    time <span class="op">=</span> <span class="fl">9.5</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    price <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> [(float_to_time(time), price)]</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> time <span class="op">&lt;</span> <span class="dv">16</span>:</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>        elapsed <span class="op">=</span> np.random.exponential(<span class="fl">.001</span>)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>        time <span class="op">+=</span> elapsed</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> time <span class="op">&gt;</span> <span class="dv">16</span>:</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>        price_diff <span class="op">=</span> np.random.uniform(<span class="fl">.999</span>, <span class="fl">1.001</span>)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>        price <span class="op">*=</span> price_diff</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>        results.append((float_to_time(time), price))</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(results, columns <span class="op">=</span> [<span class="st">'time'</span>,<span class="st">'price'</span>])</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>    df.time <span class="op">=</span> pd.to_datetime(df.time)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a><span class="co">#Don't read me unless you get stuck!</span></span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_candlestick(agg):</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a><span class="co">    agg is a DataFrame which has a DatetimeIndex and five columns: ["open","high","low","close","color"]</span></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> time <span class="kw">in</span> agg.index:</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>        ax.plot([time.hour] <span class="op">*</span> <span class="dv">2</span>, agg.loc[time, [<span class="st">"high"</span>,<span class="st">"low"</span>]].values, color <span class="op">=</span> <span class="st">"black"</span>)</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>        ax.plot([time.hour] <span class="op">*</span> <span class="dv">2</span>, agg.loc[time, [<span class="st">"open"</span>,<span class="st">"close"</span>]].values, color <span class="op">=</span> agg.loc[time, <span class="st">"color"</span>], linewidth <span class="op">=</span> <span class="dv">10</span>)</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim((<span class="dv">8</span>,<span class="dv">16</span>))</span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Price"</span>)</span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Hour"</span>)</span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">"OHLC of Stock Value During Trading Day"</span>)</span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>59.</strong> Generate a day’s worth of random stock data, and aggregate / reformat it so that it has hourly summaries of the opening, highest, lowest, and closing prices</p>
+<p><strong>60.</strong> Now that you have your properly-formatted data, try to plot it yourself as a candlestick chart. Use the <code>plot_candlestick(df)</code> function above, or matplotlib’s <a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html"><code>plot</code> documentation</a> if you get stuck.</p>
+<p><em>More exercises to follow soon…</em></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
