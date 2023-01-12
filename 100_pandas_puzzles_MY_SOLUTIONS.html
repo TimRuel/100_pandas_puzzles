@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.__version__</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>'1.1.5'</code></pre>
+<pre><code>'1.5.2'</code></pre>
 </div>
 </div>
 <p><strong>3.</strong> Print out all the <em>version</em> information of the libraries that are required by the pandas library.</p>
@@ -157,8 +157,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>
 INSTALLED VERSIONS
 ------------------
-commit           : b5958ee1999e9aead1938c0bba2b674378807b3d
-python           : 3.7.0.final.0
+commit           : 8dab54d6573f7186ff0c3b6364d5e4dd635ff3e7
+python           : 3.11.1.final.0
 python-bits      : 64
 OS               : Windows
 OS-release       : 10
@@ -170,16 +170,16 @@ LC_ALL           : None
 LANG             : None
 LOCALE           : English_United States.utf8
 
-pandas           : 1.1.5
-numpy            : 1.20.1
-pytz             : 2018.5
+pandas           : 1.5.2
+numpy            : 1.24.1
+pytz             : 2022.7
 dateutil         : 2.8.2
+setuptools       : 65.7.0
 pip              : 22.3.1
-setuptools       : 58.2.0
 Cython           : None
 pytest           : None
 hypothesis       : None
-sphinx           : 1.7.5
+sphinx           : None
 blosc            : None
 feather          : None
 xlsxwriter       : None
@@ -187,31 +187,38 @@ lxml.etree       : None
 html5lib         : None
 pymysql          : None
 psycopg2         : None
-jinja2           : 3.1.2
-IPython          : 7.34.0
+jinja2           : None
+IPython          : None
 pandas_datareader: None
-bs4              : 4.11.1
+bs4              : None
 bottleneck       : None
-fsspec           : None
+brotli           : None
 fastparquet      : None
+fsspec           : None
 gcsfs            : None
-matplotlib       : 3.5.3
+matplotlib       : 3.6.2
+numba            : None
 numexpr          : None
 odfpy            : None
 openpyxl         : None
 pandas_gbq       : None
 pyarrow          : None
-pytables         : None
+pyreadstat       : None
 pyxlsb           : None
 s3fs             : None
-scipy            : 1.7.3
+scipy            : 1.10.0
+snappy           : None
 sqlalchemy       : None
 tables           : None
 tabulate         : None
 xarray           : None
 xlrd             : None
 xlwt             : None
-numba            : None</code></pre>
+zstandard        : None
+tzdata           : None
+
+C:\Users\TimRu\Envs\pandas_puzzles_env\Lib\site-packages\_distutils_hack\__init__.py:33: UserWarning: Setuptools is replacing distutils.
+  warnings.warn("Setuptools is replacing distutils.")</code></pre>
 </div>
 </div>
 </section>
@@ -600,22 +607,22 @@ python  4.5  0.5   NaN</code></pre>
 <span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">apply</span>(subtract_row_mean, axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          0         1         2
-0  0.062834  0.065216 -0.128050
-1 -0.223248  0.479454 -0.256206
-2  0.434389 -0.300226 -0.134163
-3  0.170895 -0.456119  0.285224
-4 -0.376367  0.353168  0.023199</code></pre>
+0 -0.288369  0.221638  0.066731
+1  0.171003  0.069980 -0.240982
+2 -0.048256  0.017361  0.030895
+3  0.439259 -0.100215 -0.339044
+4 -0.027808  0.073056 -0.045248</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>df.sub(df.mean(axis <span class="op">=</span> <span class="dv">1</span>), axis <span class="op">=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          0         1         2
-0  0.062834  0.065216 -0.128050
-1 -0.223248  0.479454 -0.256206
-2  0.434389 -0.300226 -0.134163
-3  0.170895 -0.456119  0.285224
-4 -0.376367  0.353168  0.023199</code></pre>
+0 -0.288369  0.221638  0.066731
+1  0.171003  0.069980 -0.240982
+2 -0.048256  0.017361  0.030895
+3  0.439259 -0.100215 -0.339044
+4 -0.027808  0.073056 -0.045248</code></pre>
 </div>
 </div>
 <p><strong>24.</strong> Suppose you have a DataFrame with 10 columns of real numbers, for example:</p>
@@ -626,7 +633,7 @@ python  4.5  0.5   NaN</code></pre>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">sum</span>().idxmin()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>'d'</code></pre>
+<pre><code>'g'</code></pre>
 </div>
 </div>
 <p><strong>25.</strong> How do you count how many unique rows a DataFrame has (i.e.&nbsp;ignore all rows that are duplicates)? As input, use a DataFrame of zeros and ones with 10 rows and 3 columns.</p>
@@ -635,11 +642,11 @@ python  4.5  0.5   NaN</code></pre>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>df.drop_duplicates(keep <span class="op">=</span> <span class="va">False</span>).shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>4</code></pre>
+<pre><code>2</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(df.drop_duplicates(keep <span class="op">=</span> <span class="va">False</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>4</code></pre>
+<pre><code>2</code></pre>
 </div>
 </div>
 <p>The next three puzzles are slightly harder.</p>
@@ -816,101 +823,99 @@ Name: B, dtype: int32</code></pre>
 6  False  False  False  False  False  False  False  False
 7  False  False  False  False  False   True  False  False</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="bu">map</span>(np.flip, np.where(df.<span class="bu">max</span>().nlargest(<span class="dv">3</span>) <span class="op">==</span> df))</span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> merge(list1, list2):</span>
-<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>    merged_list <span class="op">=</span> [(list1[i], list2[i]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(list1))]</span>
-<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> merged_list</span>
-<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a>merge(b, a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="bu">map</span>(np.flip, np.where(df.<span class="bu">max</span>().nlargest(<span class="dv">3</span>) <span class="op">==</span> df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;string&gt;:1: FutureWarning: Automatic reindexing on DataFrame vs Series comparisons is deprecated and will raise ValueError in a future version. Do `left, right = left.align(right, axis=1, copy=False)` before e.g. `left == right`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> merge(list1, list2):</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>    merged_list <span class="op">=</span> [(list1[i], list2[i]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(list1))]</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> merged_list</span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>merge(b, a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[(5, 7), (2, 5), (6, 4)]</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>df.unstack().sort_values()[<span class="op">-</span><span class="dv">3</span>:].index.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>df.unstack().sort_values()[<span class="op">-</span><span class="dv">3</span>:].index.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[(5, 7), (6, 4), (2, 5)]</code></pre>
 </div>
 </div>
 <p><strong>31.</strong> You are given the DataFrame below with a column of group IDs, ‘grps’, and a column of corresponding integer values, ‘vals’.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"vals"</span>: np.random.RandomState(<span class="dv">31</span>).randint(<span class="op">-</span><span class="dv">30</span>, <span class="dv">30</span>, size<span class="op">=</span><span class="dv">15</span>),</span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"grps"</span>: np.random.RandomState(<span class="dv">31</span>).choice([<span class="st">"A"</span>, <span class="st">"B"</span>], <span class="dv">15</span>)})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"vals"</span>: np.random.RandomState(<span class="dv">31</span>).randint(<span class="op">-</span><span class="dv">30</span>, <span class="dv">30</span>, size<span class="op">=</span><span class="dv">15</span>),</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"grps"</span>: np.random.RandomState(<span class="dv">31</span>).choice([<span class="st">"A"</span>, <span class="st">"B"</span>], <span class="dv">15</span>)})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Create a new column ‘patched_values’ which contains the same values as the ‘vals’ any negative values in ‘vals’ with the group mean:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>  vals grps patched_vals</span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>  <span class="op">-</span><span class="dv">12</span>    A         <span class="fl">13.6</span></span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>   <span class="op">-</span><span class="dv">7</span>    B         <span class="fl">28.0</span></span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="op">-</span><span class="dv">14</span>    A         <span class="fl">13.6</span></span>
-<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>    <span class="dv">4</span>    A          <span class="fl">4.0</span></span>
-<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>   <span class="op">-</span><span class="dv">7</span>    A         <span class="fl">13.6</span></span>
-<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>   <span class="dv">28</span>    B         <span class="fl">28.0</span></span>
-<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>   <span class="op">-</span><span class="dv">2</span>    A         <span class="fl">13.6</span></span>
-<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>   <span class="op">-</span><span class="dv">1</span>    A         <span class="fl">13.6</span></span>
-<span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>    <span class="dv">8</span>    A          <span class="fl">8.0</span></span>
-<span id="cb94-11"><a href="#cb94-11" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>   <span class="op">-</span><span class="dv">2</span>    B         <span class="fl">28.0</span></span>
-<span id="cb94-12"><a href="#cb94-12" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>  <span class="dv">28</span>    A         <span class="fl">28.0</span></span>
-<span id="cb94-13"><a href="#cb94-13" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span>  <span class="dv">12</span>    A         <span class="fl">12.0</span></span>
-<span id="cb94-14"><a href="#cb94-14" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span>  <span class="dv">16</span>    A         <span class="fl">16.0</span></span>
-<span id="cb94-15"><a href="#cb94-15" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="op">-</span><span class="dv">24</span>    A         <span class="fl">13.6</span></span>
-<span id="cb94-16"><a href="#cb94-16" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span> <span class="op">-</span><span class="dv">12</span>    A         <span class="fl">13.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>  vals grps patched_vals</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>  <span class="op">-</span><span class="dv">12</span>    A         <span class="fl">13.6</span></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>   <span class="op">-</span><span class="dv">7</span>    B         <span class="fl">28.0</span></span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="op">-</span><span class="dv">14</span>    A         <span class="fl">13.6</span></span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>    <span class="dv">4</span>    A          <span class="fl">4.0</span></span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>   <span class="op">-</span><span class="dv">7</span>    A         <span class="fl">13.6</span></span>
+<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>   <span class="dv">28</span>    B         <span class="fl">28.0</span></span>
+<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>   <span class="op">-</span><span class="dv">2</span>    A         <span class="fl">13.6</span></span>
+<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>   <span class="op">-</span><span class="dv">1</span>    A         <span class="fl">13.6</span></span>
+<span id="cb96-10"><a href="#cb96-10" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>    <span class="dv">8</span>    A          <span class="fl">8.0</span></span>
+<span id="cb96-11"><a href="#cb96-11" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>   <span class="op">-</span><span class="dv">2</span>    B         <span class="fl">28.0</span></span>
+<span id="cb96-12"><a href="#cb96-12" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>  <span class="dv">28</span>    A         <span class="fl">28.0</span></span>
+<span id="cb96-13"><a href="#cb96-13" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span>  <span class="dv">12</span>    A         <span class="fl">12.0</span></span>
+<span id="cb96-14"><a href="#cb96-14" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span>  <span class="dv">16</span>    A         <span class="fl">16.0</span></span>
+<span id="cb96-15"><a href="#cb96-15" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="op">-</span><span class="dv">24</span>    A         <span class="fl">13.6</span></span>
+<span id="cb96-16"><a href="#cb96-16" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span> <span class="op">-</span><span class="dv">12</span>    A         <span class="fl">13.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"vals"</span>: np.random.RandomState(<span class="dv">31</span>).randint(<span class="op">-</span><span class="dv">30</span>, <span class="dv">30</span>, size <span class="op">=</span> <span class="dv">15</span>),</span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"grps"</span>: np.random.RandomState(<span class="dv">31</span>).choice([<span class="st">"A"</span>, <span class="st">"B"</span>], <span class="dv">15</span>)})</span>
-<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>                  </span>
-<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>grp_means <span class="op">=</span> df[df[<span class="st">"vals"</span>] <span class="op">&gt;</span> <span class="dv">0</span>].groupby(<span class="st">"grps"</span>).mean(<span class="st">"vals"</span>).unstack()</span>
-<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a>                   </span>
-<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"patched_vals"</span>] <span class="op">=</span> df[<span class="st">"vals"</span>]</span>
-<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(df[<span class="st">"patched_vals"</span>])):</span>
-<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> df[<span class="st">"patched_vals"</span>][i] <span class="op">&lt;</span> <span class="dv">0</span>:</span>
-<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> df[<span class="st">"grps"</span>][i] <span class="op">==</span> <span class="st">"A"</span>:</span>
-<span id="cb95-12"><a href="#cb95-12" aria-hidden="true" tabindex="-1"></a>      df[<span class="st">"patched_vals"</span>][i] <span class="op">=</span> grp_means[<span class="dv">0</span>]</span>
-<span id="cb95-13"><a href="#cb95-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb95-14"><a href="#cb95-14" aria-hidden="true" tabindex="-1"></a>      df[<span class="st">"patched_vals"</span>][i] <span class="op">=</span> grp_means[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"vals"</span>: np.random.RandomState(<span class="dv">31</span>).randint(<span class="op">-</span><span class="dv">30</span>, <span class="dv">30</span>, size <span class="op">=</span> <span class="dv">15</span>),</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"grps"</span>: np.random.RandomState(<span class="dv">31</span>).choice([<span class="st">"A"</span>, <span class="st">"B"</span>], <span class="dv">15</span>)})</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>                  </span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>grp_means <span class="op">=</span> df[df[<span class="st">"vals"</span>] <span class="op">&gt;</span> <span class="dv">0</span>].groupby(<span class="st">"grps"</span>).mean(<span class="st">"vals"</span>).unstack()</span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>                   </span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"patched_vals"</span>] <span class="op">=</span> df[<span class="st">"vals"</span>]</span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(df[<span class="st">"patched_vals"</span>])):</span>
+<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> df[<span class="st">"patched_vals"</span>][i] <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb97-11"><a href="#cb97-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> df[<span class="st">"grps"</span>][i] <span class="op">==</span> <span class="st">"A"</span>:</span>
+<span id="cb97-12"><a href="#cb97-12" aria-hidden="true" tabindex="-1"></a>      df[<span class="st">"patched_vals"</span>][i] <span class="op">=</span> grp_means[<span class="dv">0</span>]</span>
+<span id="cb97-13"><a href="#cb97-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb97-14"><a href="#cb97-14" aria-hidden="true" tabindex="-1"></a>      df[<span class="st">"patched_vals"</span>][i] <span class="op">=</span> grp_means[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>C:/Python37/python.exe:4: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-C:/Python37/python.exe:6: SettingWithCopyWarning: 
+<pre><code>&lt;string&gt;:4: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    vals grps  patched_vals
-0    -12    A            13
-1     -7    B            28
-2    -14    A            13
-3      4    A             4
-4     -7    A            13
-5     28    B            28
-6     -2    A            13
-7     -1    A            13
-8      8    A             8
-9     -2    B            28
-10    28    A            28
-11    12    A            12
-12    16    A            16
-13   -24    A            13
-14   -12    A            13</code></pre>
+0    -12    A          13.6
+1     -7    B          28.0
+2    -14    A          13.6
+3      4    A           4.0
+4     -7    A          13.6
+5     28    B          28.0
+6     -2    A          13.6
+7     -1    A          13.6
+8      8    A           8.0
+9     -2    B          28.0
+10    28    A          28.0
+11    12    A          12.0
+12    16    A          16.0
+13   -24    A          13.6
+14   -12    A          13.6</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"vals"</span>: np.random.RandomState(<span class="dv">31</span>).randint(<span class="op">-</span><span class="dv">30</span>, <span class="dv">30</span>, size<span class="op">=</span><span class="dv">15</span>), </span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"grps"</span>: np.random.RandomState(<span class="dv">31</span>).choice([<span class="st">"A"</span>, <span class="st">"B"</span>], <span class="dv">15</span>)})</span>
-<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> replace(group):</span>
-<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> group <span class="op">&lt;</span> <span class="dv">0</span></span>
-<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a>    group[mask] <span class="op">=</span> group[<span class="op">~</span>mask].mean()</span>
-<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> group</span>
-<span id="cb99-8"><a href="#cb99-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-9"><a href="#cb99-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"patched_vals"</span>] <span class="op">=</span> df.groupby([<span class="st">'grps'</span>])[<span class="st">'vals'</span>].transform(replace)</span>
-<span id="cb99-10"><a href="#cb99-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-11"><a href="#cb99-11" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"vals"</span>: np.random.RandomState(<span class="dv">31</span>).randint(<span class="op">-</span><span class="dv">30</span>, <span class="dv">30</span>, size<span class="op">=</span><span class="dv">15</span>), </span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"grps"</span>: np.random.RandomState(<span class="dv">31</span>).choice([<span class="st">"A"</span>, <span class="st">"B"</span>], <span class="dv">15</span>)})</span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> replace(group):</span>
+<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> group <span class="op">&lt;</span> <span class="dv">0</span></span>
+<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a>    group[mask] <span class="op">=</span> group[<span class="op">~</span>mask].mean()</span>
+<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> group</span>
+<span id="cb101-8"><a href="#cb101-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-9"><a href="#cb101-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"patched_vals"</span>] <span class="op">=</span> df.groupby([<span class="st">'grps'</span>])[<span class="st">'vals'</span>].transform(replace)</span>
+<span id="cb101-10"><a href="#cb101-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-11"><a href="#cb101-11" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    vals grps  patched_vals
 0    -12    A          13.6
@@ -932,10 +937,10 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 <p><strong>32.</strong> Implement a rolling mean over groups with window size 3, which ignores NaN value. For example consider the following DataFrame:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'group'</span>: <span class="bu">list</span>(<span class="st">'aabbabbbabab'</span>),</span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'value'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, np.nan, <span class="dv">2</span>, <span class="dv">3</span>, np.nan, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>, np.nan, <span class="dv">8</span>]})</span>
-<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'group'</span>: <span class="bu">list</span>(<span class="st">'aabbabbbabab'</span>),</span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'value'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, np.nan, <span class="dv">2</span>, <span class="dv">3</span>, np.nan, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>, np.nan, <span class="dv">8</span>]})</span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group  value
 0      a    1.0
@@ -953,28 +958,28 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>The goal is to compute the Series:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>   <span class="fl">1.000000</span></span>
-<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>   <span class="fl">1.500000</span></span>
-<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>   <span class="fl">3.000000</span></span>
-<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>   <span class="fl">3.000000</span></span>
-<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>   <span class="fl">1.666667</span></span>
-<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>   <span class="fl">3.000000</span></span>
-<span id="cb103-7"><a href="#cb103-7" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>   <span class="fl">3.000000</span></span>
-<span id="cb103-8"><a href="#cb103-8" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>   <span class="fl">2.000000</span></span>
-<span id="cb103-9"><a href="#cb103-9" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>   <span class="fl">3.666667</span></span>
-<span id="cb103-10"><a href="#cb103-10" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>   <span class="fl">2.000000</span></span>
-<span id="cb103-11"><a href="#cb103-11" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>  <span class="fl">4.500000</span></span>
-<span id="cb103-12"><a href="#cb103-12" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span>  <span class="fl">4.000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>   <span class="fl">1.000000</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>   <span class="fl">1.500000</span></span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>   <span class="fl">3.000000</span></span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>   <span class="fl">3.000000</span></span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>   <span class="fl">1.666667</span></span>
+<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>   <span class="fl">3.000000</span></span>
+<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>   <span class="fl">3.000000</span></span>
+<span id="cb105-8"><a href="#cb105-8" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>   <span class="fl">2.000000</span></span>
+<span id="cb105-9"><a href="#cb105-9" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>   <span class="fl">3.666667</span></span>
+<span id="cb105-10"><a href="#cb105-10" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>   <span class="fl">2.000000</span></span>
+<span id="cb105-11"><a href="#cb105-11" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>  <span class="fl">4.500000</span></span>
+<span id="cb105-12"><a href="#cb105-12" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span>  <span class="fl">4.000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>E.g. the first window of size three for group ‘b’ has values 3.0, NaN and 3.0 and occurs at row index 5. Instead of being NaN the value in the new column at this row index should be 3.0 (just the two non-NaN values are used to compute the mean (3+3)/2)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Answer key solution (clunky)</span></span>
-<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>g1 <span class="op">=</span> df.groupby([<span class="st">'group'</span>])[<span class="st">'value'</span>]              <span class="co"># group values  </span></span>
-<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> df.fillna(<span class="dv">0</span>).groupby([<span class="st">'group'</span>])[<span class="st">'value'</span>]    <span class="co"># fillna, then group values</span></span>
-<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> g2.rolling(<span class="dv">3</span>, min_periods<span class="op">=</span><span class="dv">1</span>).<span class="bu">sum</span>() <span class="op">/</span> g1.rolling(<span class="dv">3</span>, min_periods<span class="op">=</span><span class="dv">1</span>).count() <span class="co"># compute means</span></span>
-<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-8"><a href="#cb104-8" aria-hidden="true" tabindex="-1"></a>s.reset_index(level<span class="op">=</span><span class="dv">0</span>, drop<span class="op">=</span><span class="va">True</span>).sort_index()  <span class="co"># drop/sort index</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Answer key solution (clunky)</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a>g1 <span class="op">=</span> df.groupby([<span class="st">'group'</span>])[<span class="st">'value'</span>]              <span class="co"># group values  </span></span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> df.fillna(<span class="dv">0</span>).groupby([<span class="st">'group'</span>])[<span class="st">'value'</span>]    <span class="co"># fillna, then group values</span></span>
+<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> g2.rolling(<span class="dv">3</span>, min_periods<span class="op">=</span><span class="dv">1</span>).<span class="bu">sum</span>() <span class="op">/</span> g1.rolling(<span class="dv">3</span>, min_periods<span class="op">=</span><span class="dv">1</span>).count() <span class="co"># compute means</span></span>
+<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a>s.reset_index(level<span class="op">=</span><span class="dv">0</span>, drop<span class="op">=</span><span class="va">True</span>).sort_index()  <span class="co"># drop/sort index</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0     1.000000
 1     1.500000
@@ -992,8 +997,8 @@ Name: value, dtype: float64</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution (much more elegant)</span></span>
-<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"group"</span>)[<span class="st">"value"</span>].transform(<span class="kw">lambda</span> s: s.rolling(<span class="dv">3</span>, min_periods <span class="op">=</span> <span class="dv">1</span>).mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution (much more elegant)</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"group"</span>)[<span class="st">"value"</span>].transform(<span class="kw">lambda</span> s: s.rolling(<span class="dv">3</span>, min_periods <span class="op">=</span> <span class="dv">1</span>).mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0     1.000000
 1     1.500000
@@ -1020,114 +1025,116 @@ Name: value, dtype: float64</code></pre>
 <p>pandas is fantastic for working with dates and times. These puzzles explore some of this functionality.</p>
 <p><strong>33.</strong> Create a DatetimeIndex that contains each business day of 2015 and use it to index a Series of random numbers. Let’s call this Series <code>s</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>dti <span class="op">=</span> pd.date_range(start <span class="op">=</span> <span class="st">"2015-01-01"</span>, end <span class="op">=</span> <span class="st">"2015-12-31"</span>, freq <span class="op">=</span> <span class="st">"B"</span>)</span>
-<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> pd.Series(np.random.rand(<span class="bu">len</span>(dti)), index <span class="op">=</span> dti)</span>
-<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>dti <span class="op">=</span> pd.date_range(start <span class="op">=</span> <span class="st">"2015-01-01"</span>, end <span class="op">=</span> <span class="st">"2015-12-31"</span>, freq <span class="op">=</span> <span class="st">"B"</span>)</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> pd.Series(np.random.rand(<span class="bu">len</span>(dti)), index <span class="op">=</span> dti)</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>2015-01-01    0.146367
-2015-01-02    0.966249
-2015-01-05    0.796062
-2015-01-06    0.544444
-2015-01-07    0.639976
+<pre><code>2015-01-01    0.563476
+2015-01-02    0.191886
+2015-01-05    0.272372
+2015-01-06    0.964974
+2015-01-07    0.948682
                 ...   
-2015-12-25    0.209118
-2015-12-28    0.797024
-2015-12-29    0.138473
-2015-12-30    0.110403
-2015-12-31    0.222468
+2015-12-25    0.350907
+2015-12-28    0.139561
+2015-12-29    0.428656
+2015-12-30    0.025627
+2015-12-31    0.064048
 Freq: B, Length: 261, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>34.</strong> Find the sum of the values in <code>s</code> for every Wednesday.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>s[s.index.day_name() <span class="op">==</span> <span class="st">"Wednesday"</span>].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>s[s.index.day_name() <span class="op">==</span> <span class="st">"Wednesday"</span>].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>27.762570539640905</code></pre>
+<pre><code>28.342026509519776</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>s[s.index.weekday <span class="op">==</span> <span class="dv">2</span>].<span class="bu">sum</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>s[s.index.weekday <span class="op">==</span> <span class="dv">2</span>].<span class="bu">sum</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>27.762570539640905</code></pre>
+<pre><code>28.342026509519776</code></pre>
 </div>
 </div>
 <p><strong>35.</strong> For each calendar month in <code>s</code>, find the mean of values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>s.groupby(s.index.month).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>s.groupby(s.index.month).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1     0.561279
-2     0.485390
-3     0.513704
-4     0.466124
-5     0.435492
-6     0.502047
-7     0.551707
-8     0.564351
-9     0.435276
-10    0.528501
-11    0.543363
-12    0.438074
+<pre><code>1     0.497099
+2     0.470770
+3     0.429622
+4     0.550675
+5     0.509274
+6     0.448345
+7     0.494724
+8     0.402199
+9     0.534652
+10    0.575667
+11    0.496698
+12    0.470602
 dtype: float64</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>s.resample(<span class="st">'M'</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>s.resample(<span class="st">'M'</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>2015-01-31    0.561279
-2015-02-28    0.485390
-2015-03-31    0.513704
-2015-04-30    0.466124
-2015-05-31    0.435492
-2015-06-30    0.502047
-2015-07-31    0.551707
-2015-08-31    0.564351
-2015-09-30    0.435276
-2015-10-31    0.528501
-2015-11-30    0.543363
-2015-12-31    0.438074
+<pre><code>2015-01-31    0.497099
+2015-02-28    0.470770
+2015-03-31    0.429622
+2015-04-30    0.550675
+2015-05-31    0.509274
+2015-06-30    0.448345
+2015-07-31    0.494724
+2015-08-31    0.402199
+2015-09-30    0.534652
+2015-10-31    0.575667
+2015-11-30    0.496698
+2015-12-31    0.470602
 Freq: M, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>36.</strong> For each group of four consecutive calendar months in <code>s</code>, find the date on which the highest value occurred.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Solution given in answer key (bad)</span></span>
-<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>s.groupby(pd.Grouper(freq<span class="op">=</span><span class="st">'4M'</span>)).idxmax()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Solution given in answer key (bad)</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>s.groupby(pd.Grouper(freq<span class="op">=</span><span class="st">'4M'</span>)).idxmax()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>2015-01-31   2015-01-27
-2015-05-31   2015-02-10
-2015-09-30   2015-07-02
-2016-01-31   2015-11-17
+<pre><code>2015-01-31   2015-01-12
+2015-05-31   2015-03-03
+2015-09-30   2015-09-23
+2016-01-31   2015-10-14
 Freq: 4M, dtype: datetime64[ns]</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution is more correct and more thorough</span></span>
-<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> calendar</span>
-<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> <span class="bu">list</span>(calendar.month_name[<span class="dv">1</span>:])</span>
-<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-6"><a href="#cb120-6" aria-hidden="true" tabindex="-1"></a>intervals <span class="op">=</span> [<span class="st">'</span><span class="sc">{}</span><span class="st"> - </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(months[i], months[i<span class="op">+</span><span class="dv">3</span>]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(months) <span class="op">-</span> <span class="dv">3</span>)]</span>
-<span id="cb120-7"><a href="#cb120-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-8"><a href="#cb120-8" aria-hidden="true" tabindex="-1"></a>monthly_highs <span class="op">=</span> s.groupby(pd.Grouper(freq <span class="op">=</span> <span class="st">'1M'</span>)).agg([<span class="st">'max'</span>, <span class="st">'idxmax'</span>]).rename(columns <span class="op">=</span> {<span class="st">'max'</span>: <span class="st">'Maximum'</span>, <span class="st">'idxmax'</span>: <span class="st">'Date'</span>})</span>
-<span id="cb120-9"><a href="#cb120-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-10"><a href="#cb120-10" aria-hidden="true" tabindex="-1"></a>monthly_highs.rolling(window <span class="op">=</span> <span class="dv">4</span>).<span class="bu">max</span>().dropna().merge(monthly_highs, how <span class="op">=</span> <span class="st">'left'</span>).assign(Period <span class="op">=</span> intervals).set_index(<span class="st">'Period'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution is more correct and more thorough</span></span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> calendar</span>
+<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> <span class="bu">list</span>(calendar.month_name[<span class="dv">1</span>:])</span>
+<span id="cb122-5"><a href="#cb122-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-6"><a href="#cb122-6" aria-hidden="true" tabindex="-1"></a>intervals <span class="op">=</span> [<span class="st">'</span><span class="sc">{}</span><span class="st"> - </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(months[i], months[i<span class="op">+</span><span class="dv">3</span>]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(months) <span class="op">-</span> <span class="dv">3</span>)]</span>
+<span id="cb122-7"><a href="#cb122-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-8"><a href="#cb122-8" aria-hidden="true" tabindex="-1"></a>monthly_highs <span class="op">=</span> s.groupby(pd.Grouper(freq <span class="op">=</span> <span class="st">'1M'</span>)).agg([<span class="st">'max'</span>, <span class="st">'idxmax'</span>]).rename(columns <span class="op">=</span> {<span class="st">'max'</span>: <span class="st">'Maximum'</span>, <span class="st">'idxmax'</span>: <span class="st">'Date'</span>})</span>
+<span id="cb122-9"><a href="#cb122-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-10"><a href="#cb122-10" aria-hidden="true" tabindex="-1"></a>monthly_highs.rolling(window <span class="op">=</span> <span class="dv">4</span>).<span class="bu">max</span>().dropna().merge(monthly_highs, how <span class="op">=</span> <span class="st">'left'</span>).assign(Period <span class="op">=</span> intervals).set_index(<span class="st">'Period'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       Maximum       Date
 Period                                   
-January - April       0.995173 2015-02-10
-February - May        0.995173 2015-02-10
-March - June          0.982028 2015-04-01
-April - July          0.994689 2015-07-02
-May - August          0.994689 2015-07-02
-June - September      0.994689 2015-07-02
-July - October        0.994689 2015-07-02
-August - November     0.979259 2015-11-17
-September - December  0.979259 2015-11-17</code></pre>
+January - April       0.998562 2015-03-03
+February - May        0.998562 2015-03-03
+March - June          0.998562 2015-03-03
+April - July          0.984065 2015-04-27
+May - August          0.973552 2015-05-06
+June - September      0.998234 2015-09-23
+July - October        0.998274 2015-10-14
+August - November     0.998274 2015-10-14
+September - December  0.998274 2015-10-14
+
+&lt;string&gt;:1: FutureWarning: Dropping of nuisance columns in rolling operations is deprecated; in a future version this will raise TypeError. Select only valid columns before calling the operation. Dropped columns were Index(['Date'], dtype='object')</code></pre>
 </div>
 </div>
 <p><strong>37.</strong> Create a DateTimeIndex consisting of the third Thursday in each month for the years 2015 and 2016.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>pd.date_range(start <span class="op">=</span> <span class="st">"2015-01-01"</span>, end <span class="op">=</span> <span class="st">"2016-12-31"</span>, freq <span class="op">=</span> pd.offsets.WeekOfMonth(n <span class="op">=</span> <span class="dv">1</span>, week <span class="op">=</span> <span class="dv">2</span>, weekday <span class="op">=</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>pd.date_range(start <span class="op">=</span> <span class="st">"2015-01-01"</span>, end <span class="op">=</span> <span class="st">"2016-12-31"</span>, freq <span class="op">=</span> pd.offsets.WeekOfMonth(n <span class="op">=</span> <span class="dv">1</span>, week <span class="op">=</span> <span class="dv">2</span>, weekday <span class="op">=</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>DatetimeIndex(['2015-01-15', '2015-02-19', '2015-03-19', '2015-04-16',
                '2015-05-21', '2015-06-18', '2015-07-16', '2015-08-20',
@@ -1137,7 +1144,7 @@ September - December  0.979259 2015-11-17</code></pre>
                '2016-09-15', '2016-10-20', '2016-11-17', '2016-12-15'],
               dtype='datetime64[ns]', freq='WOM-3THU')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>pd.date_range(<span class="st">'2015-01-01'</span>, <span class="st">'2016-12-31'</span>, freq <span class="op">=</span> <span class="st">'WOM-3THU'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>pd.date_range(<span class="st">'2015-01-01'</span>, <span class="st">'2016-12-31'</span>, freq <span class="op">=</span> <span class="st">'WOM-3THU'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>DatetimeIndex(['2015-01-15', '2015-02-19', '2015-03-19', '2015-04-16',
                '2015-05-21', '2015-06-18', '2015-07-16', '2015-08-20',
@@ -1158,16 +1165,16 @@ September - December  0.979259 2015-11-17</code></pre>
 <p>It happens all the time: someone gives you data containing malformed strings, Python, lists and missing data. How do you tidy it up so you can get on with the analysis?</p>
 <p>Take this monstrosity as the DataFrame to use in the following puzzles:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'From_To'</span>: [<span class="st">'LoNDon_paris'</span>, <span class="st">'MAdrid_miLAN'</span>, <span class="st">'londON_StockhOlm'</span>,  </span>
-<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'Budapest_PaRis'</span>, <span class="st">'Brussels_londOn'</span>],</span>
-<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'FlightNumber'</span>: [<span class="dv">10045</span>, np.nan, <span class="dv">10065</span>, np.nan, <span class="dv">10085</span>],</span>
-<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'RecentDelays'</span>: [[<span class="dv">23</span>, <span class="dv">47</span>], [], [<span class="dv">24</span>, <span class="dv">43</span>, <span class="dv">87</span>], [<span class="dv">13</span>], [<span class="dv">67</span>, <span class="dv">32</span>]],</span>
-<span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'Airline'</span>: [<span class="st">'KLM(!)'</span>, <span class="st">'\&lt;Air France\&gt; (12)'</span>, </span>
-<span id="cb126-6"><a href="#cb126-6" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'(British Airways. )'</span>, <span class="st">'12. Air France'</span>, <span class="st">'"Swiss Air"'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'From_To'</span>: [<span class="st">'LoNDon_paris'</span>, <span class="st">'MAdrid_miLAN'</span>, <span class="st">'londON_StockhOlm'</span>,  </span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'Budapest_PaRis'</span>, <span class="st">'Brussels_londOn'</span>],</span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'FlightNumber'</span>: [<span class="dv">10045</span>, np.nan, <span class="dv">10065</span>, np.nan, <span class="dv">10085</span>],</span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'RecentDelays'</span>: [[<span class="dv">23</span>, <span class="dv">47</span>], [], [<span class="dv">24</span>, <span class="dv">43</span>, <span class="dv">87</span>], [<span class="dv">13</span>], [<span class="dv">67</span>, <span class="dv">32</span>]],</span>
+<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'Airline'</span>: [<span class="st">'KLM(!)'</span>, <span class="st">'\&lt;Air France\&gt; (12)'</span>, </span>
+<span id="cb128-6"><a href="#cb128-6" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'(British Airways. )'</span>, <span class="st">'12. Air France'</span>, <span class="st">'"Swiss Air"'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Formatted, it looks like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            From_To  FlightNumber  RecentDelays              Airline
 0      LoNDon_paris       10045.0      [23, 47]               KLM(!)
@@ -1180,8 +1187,8 @@ September - December  0.979259 2015-11-17</code></pre>
 <p>(It’s some flight data I made up; it’s not meant to be accurate in any way.)</p>
 <p><strong>38.</strong> Some values in the the <strong>FlightNumber</strong> column are missing (they are <code>NaN</code>). These numbers are meant to increase by 10 with each row so 10055 and 10075 need to be put in place. Modify <code>df</code> to fill in these missing numbers and make the column an integer column (instead of a float column).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"FlightNumber"</span>] <span class="op">=</span> np.arange(<span class="dv">10045</span>, <span class="dv">10095</span>, <span class="dv">10</span>)</span>
-<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"FlightNumber"</span>] <span class="op">=</span> np.arange(<span class="dv">10045</span>, <span class="dv">10095</span>, <span class="dv">10</span>)</span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            From_To  FlightNumber  RecentDelays              Airline
 0      LoNDon_paris         10045      [23, 47]               KLM(!)
@@ -1192,15 +1199,15 @@ September - December  0.979259 2015-11-17</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'From_To'</span>: [<span class="st">'LoNDon_paris'</span>, <span class="st">'MAdrid_miLAN'</span>, <span class="st">'londON_StockhOlm'</span>,  </span>
-<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'Budapest_PaRis'</span>, <span class="st">'Brussels_londOn'</span>],</span>
-<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'FlightNumber'</span>: [<span class="dv">10045</span>, np.nan, <span class="dv">10065</span>, np.nan, <span class="dv">10085</span>],</span>
-<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'RecentDelays'</span>: [[<span class="dv">23</span>, <span class="dv">47</span>], [], [<span class="dv">24</span>, <span class="dv">43</span>, <span class="dv">87</span>], [<span class="dv">13</span>], [<span class="dv">67</span>, <span class="dv">32</span>]],</span>
-<span id="cb131-5"><a href="#cb131-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'Airline'</span>: [<span class="st">'KLM(!)'</span>, <span class="st">'\&lt;Air France\&gt; (12)'</span>, </span>
-<span id="cb131-6"><a href="#cb131-6" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'(British Airways. )'</span>, <span class="st">'12. Air France'</span>, <span class="st">'"Swiss Air"'</span>]})</span>
-<span id="cb131-7"><a href="#cb131-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb131-8"><a href="#cb131-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'FlightNumber'</span>] <span class="op">=</span> df[<span class="st">'FlightNumber'</span>].interpolate().astype(<span class="bu">int</span>)</span>
-<span id="cb131-9"><a href="#cb131-9" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'From_To'</span>: [<span class="st">'LoNDon_paris'</span>, <span class="st">'MAdrid_miLAN'</span>, <span class="st">'londON_StockhOlm'</span>,  </span>
+<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'Budapest_PaRis'</span>, <span class="st">'Brussels_londOn'</span>],</span>
+<span id="cb133-3"><a href="#cb133-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'FlightNumber'</span>: [<span class="dv">10045</span>, np.nan, <span class="dv">10065</span>, np.nan, <span class="dv">10085</span>],</span>
+<span id="cb133-4"><a href="#cb133-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'RecentDelays'</span>: [[<span class="dv">23</span>, <span class="dv">47</span>], [], [<span class="dv">24</span>, <span class="dv">43</span>, <span class="dv">87</span>], [<span class="dv">13</span>], [<span class="dv">67</span>, <span class="dv">32</span>]],</span>
+<span id="cb133-5"><a href="#cb133-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'Airline'</span>: [<span class="st">'KLM(!)'</span>, <span class="st">'\&lt;Air France\&gt; (12)'</span>, </span>
+<span id="cb133-6"><a href="#cb133-6" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'(British Airways. )'</span>, <span class="st">'12. Air France'</span>, <span class="st">'"Swiss Air"'</span>]})</span>
+<span id="cb133-7"><a href="#cb133-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-8"><a href="#cb133-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'FlightNumber'</span>] <span class="op">=</span> df[<span class="st">'FlightNumber'</span>].interpolate().astype(<span class="bu">int</span>)</span>
+<span id="cb133-9"><a href="#cb133-9" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            From_To  FlightNumber  RecentDelays              Airline
 0      LoNDon_paris         10045      [23, 47]               KLM(!)
@@ -1212,9 +1219,9 @@ September - December  0.979259 2015-11-17</code></pre>
 </div>
 <p><strong>39.</strong> The <strong>From_To</strong> column would be better as two separate columns! Split each string on the underscore delimiter <code>_</code> to give a new temporary DataFrame called ‘temp’ with the correct values. Assign the correct column names ‘From’ and ‘To’ to this temporary DataFrame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> df.From_To.<span class="bu">str</span>.split(<span class="st">'_'</span>, expand <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a>temp.columns <span class="op">=</span> [<span class="st">'From'</span>, <span class="st">'To'</span>]</span>
-<span id="cb133-3"><a href="#cb133-3" aria-hidden="true" tabindex="-1"></a>temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> df.From_To.<span class="bu">str</span>.split(<span class="st">'_'</span>, expand <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>temp.columns <span class="op">=</span> [<span class="st">'From'</span>, <span class="st">'To'</span>]</span>
+<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       From         To
 0    LoNDon      paris
@@ -1226,8 +1233,8 @@ September - December  0.979259 2015-11-17</code></pre>
 </div>
 <p><strong>40.</strong> Notice how the capitalisation of the city names is all mixed up in this temporary DataFrame ‘temp’. Standardise the strings so that only the first letter is uppercase (e.g.&nbsp;“londON” should become “London”.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> temp.<span class="bu">apply</span>(<span class="kw">lambda</span> x: pd.Series.<span class="bu">str</span>(x).title())</span>
-<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> temp.<span class="bu">apply</span>(<span class="kw">lambda</span> x: pd.Series.<span class="bu">str</span>(x).title())</span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       From         To
 0    London      Paris
@@ -1238,11 +1245,11 @@ September - December  0.979259 2015-11-17</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> df.From_To.<span class="bu">str</span>.split(<span class="st">'_'</span>, expand <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>temp.columns <span class="op">=</span> [<span class="st">'From'</span>, <span class="st">'To'</span>]</span>
-<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a>temp[<span class="st">'From'</span>] <span class="op">=</span> temp[<span class="st">'From'</span>].<span class="bu">str</span>.capitalize()</span>
-<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a>temp[<span class="st">'To'</span>] <span class="op">=</span> temp[<span class="st">'To'</span>].<span class="bu">str</span>.capitalize()</span>
-<span id="cb137-5"><a href="#cb137-5" aria-hidden="true" tabindex="-1"></a>temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> df.From_To.<span class="bu">str</span>.split(<span class="st">'_'</span>, expand <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>temp.columns <span class="op">=</span> [<span class="st">'From'</span>, <span class="st">'To'</span>]</span>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>temp[<span class="st">'From'</span>] <span class="op">=</span> temp[<span class="st">'From'</span>].<span class="bu">str</span>.capitalize()</span>
+<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a>temp[<span class="st">'To'</span>] <span class="op">=</span> temp[<span class="st">'To'</span>].<span class="bu">str</span>.capitalize()</span>
+<span id="cb139-5"><a href="#cb139-5" aria-hidden="true" tabindex="-1"></a>temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       From         To
 0    London      Paris
@@ -1254,9 +1261,9 @@ September - December  0.979259 2015-11-17</code></pre>
 </div>
 <p><strong>41.</strong> Delete the <strong>From_To</strong> column from <code>df</code> and attach the temporary DataFrame ‘temp’ from the previous questions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(<span class="st">'From_To'</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.join(temp)</span>
-<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(<span class="st">'From_To'</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.join(temp)</span>
+<span id="cb141-3"><a href="#cb141-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   FlightNumber  RecentDelays              Airline      From         To
 0         10045      [23, 47]               KLM(!)    London      Paris
@@ -1268,8 +1275,11 @@ September - December  0.979259 2015-11-17</code></pre>
 </div>
 <p><strong>42</strong>. In the <strong>Airline</strong> column, you can see some extra punctuation and symbols have appeared around the airline names. Pull out just the airline name. E.g. <code>'(British Airways. )'</code> should become <code>'British Airways'</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Airline"</span>] <span class="op">=</span> df[<span class="st">"Airline"</span>].<span class="bu">str</span>.replace(<span class="vs">r'[^A-Za-z ]+'</span>, <span class="st">''</span>).<span class="bu">str</span>.strip()</span>
-<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Airline"</span>] <span class="op">=</span> df[<span class="st">"Airline"</span>].<span class="bu">str</span>.replace(<span class="vs">r'[^A-Za-z ]+'</span>, <span class="st">''</span>).<span class="bu">str</span>.strip()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;string&gt;:1: FutureWarning: The default value of regex will change from True to False in a future version.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   FlightNumber  RecentDelays          Airline      From         To
 0         10045      [23, 47]              KLM    London      Paris
@@ -1282,19 +1292,19 @@ September - December  0.979259 2015-11-17</code></pre>
 <p><strong>43</strong>. In the RecentDelays column, the values have been entered into the DataFrame as a list. We would like each first value in its own column, each second value in its own column, and so on. If there isn’t an Nth value, the value should be NaN.</p>
 <p>Expand the Series of lists into a DataFrame named <code>delays</code>, rename the columns <code>delay_1</code>, <code>delay_2</code>, etc. and replace the unwanted RecentDelays column in <code>df</code> with <code>delays</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>delays <span class="op">=</span> pd.DataFrame(df[<span class="st">'RecentDelays'</span>].to_list())</span>
-<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>delays.columns <span class="op">=</span> [<span class="st">'delay_</span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(x<span class="op">+</span><span class="dv">1</span>) <span class="cf">for</span> x <span class="kw">in</span> delays.columns]</span>
-<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(<span class="st">"RecentDelays"</span>, axis <span class="op">=</span> <span class="dv">1</span>).join(delays)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a>delays <span class="op">=</span> pd.DataFrame(df[<span class="st">'RecentDelays'</span>].to_list())</span>
+<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a>delays.columns <span class="op">=</span> [<span class="st">'delay_</span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(x<span class="op">+</span><span class="dv">1</span>) <span class="cf">for</span> x <span class="kw">in</span> delays.columns]</span>
+<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(<span class="st">"RecentDelays"</span>, axis <span class="op">=</span> <span class="dv">1</span>).join(delays)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The DataFrame should look much better now.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>   FlightNumber          Airline      From         To  delay_1  delay_2  delay_3</span>
-<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>         <span class="dv">10045</span>              KLM    London      Paris     <span class="fl">23.0</span>     <span class="fl">47.0</span>      NaN</span>
-<span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>         <span class="dv">10055</span>       Air France    Madrid      Milan      NaN      NaN      NaN</span>
-<span id="cb144-4"><a href="#cb144-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>         <span class="dv">10065</span>  British Airways    London  Stockholm     <span class="fl">24.0</span>     <span class="fl">43.0</span>     <span class="fl">87.0</span></span>
-<span id="cb144-5"><a href="#cb144-5" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>         <span class="dv">10075</span>       Air France  Budapest      Paris     <span class="fl">13.0</span>      NaN      NaN</span>
-<span id="cb144-6"><a href="#cb144-6" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>         <span class="dv">10085</span>        Swiss Air  Brussels     London     <span class="fl">67.0</span>     <span class="fl">32.0</span>      NaN</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a>   FlightNumber          Airline      From         To  delay_1  delay_2  delay_3</span>
+<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>         <span class="dv">10045</span>              KLM    London      Paris     <span class="fl">23.0</span>     <span class="fl">47.0</span>      NaN</span>
+<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>         <span class="dv">10055</span>       Air France    Madrid      Milan      NaN      NaN      NaN</span>
+<span id="cb148-4"><a href="#cb148-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>         <span class="dv">10065</span>  British Airways    London  Stockholm     <span class="fl">24.0</span>     <span class="fl">43.0</span>     <span class="fl">87.0</span></span>
+<span id="cb148-5"><a href="#cb148-5" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>         <span class="dv">10075</span>       Air France  Budapest      Paris     <span class="fl">13.0</span>      NaN      NaN</span>
+<span id="cb148-6"><a href="#cb148-6" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>         <span class="dv">10085</span>        Swiss Air  Brussels     London     <span class="fl">67.0</span>     <span class="fl">32.0</span>      NaN</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.to_string())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.to_string())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   FlightNumber          Airline      From         To  delay_1  delay_2  delay_3
 0         10045              KLM    London      Paris     23.0     47.0      NaN
@@ -1316,183 +1326,189 @@ September - December  0.979259 2015-11-17</code></pre>
 <p>To warm up, we’ll make a Series with two index levels.</p>
 <p><strong>44</strong>. Given the lists <code>letters = ['A', 'B', 'C']</code> and <code>numbers = list(range(10))</code>, construct a MultiIndex object from the product of the two lists. Use it to index a Series of random numbers. Call this Series <code>s</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a>letters <span class="op">=</span> [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>]</span>
-<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">10</span>))</span>
-<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-4"><a href="#cb147-4" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> pd.MultiIndex.from_product([letters, numbers])</span>
-<span id="cb147-5"><a href="#cb147-5" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> pd.Series(np.random.rand(<span class="dv">30</span>), index <span class="op">=</span> index)</span>
-<span id="cb147-6"><a href="#cb147-6" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>letters <span class="op">=</span> [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>]</span>
+<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">10</span>))</span>
+<span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-4"><a href="#cb151-4" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> pd.MultiIndex.from_product([letters, numbers])</span>
+<span id="cb151-5"><a href="#cb151-5" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> pd.Series(np.random.rand(<span class="dv">30</span>), index <span class="op">=</span> index)</span>
+<span id="cb151-6"><a href="#cb151-6" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>A  0    0.063626
-   1    0.138309
-   2    0.422171
-   3    0.612326
-   4    0.019972
-   5    0.804370
-   6    0.528169
-   7    0.116078
-   8    0.995022
-   9    0.230250
-B  0    0.957798
-   1    0.141828
-   2    0.471900
-   3    0.606597
-   4    0.974814
-   5    0.399337
-   6    0.465512
-   7    0.204560
-   8    0.291415
-   9    0.438684
-C  0    0.938660
-   1    0.834213
-   2    0.779259
-   3    0.094689
-   4    0.438100
-   5    0.861281
-   6    0.607716
-   7    0.650294
-   8    0.300491
-   9    0.327839
+<pre><code>A  0    0.677786
+   1    0.116181
+   2    0.373907
+   3    0.656674
+   4    0.054367
+   5    0.822208
+   6    0.129767
+   7    0.686868
+   8    0.729329
+   9    0.867780
+B  0    0.378729
+   1    0.664604
+   2    0.569292
+   3    0.232900
+   4    0.551805
+   5    0.973104
+   6    0.686141
+   7    0.036047
+   8    0.925067
+   9    0.865749
+C  0    0.427958
+   1    0.880935
+   2    0.882122
+   3    0.045384
+   4    0.980214
+   5    0.380487
+   6    0.520549
+   7    0.349330
+   8    0.077753
+   9    0.624733
 dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>45.</strong> Check the index of <code>s</code> is lexicographically sorted (this is a necessary property for indexing to work correctly with a MultiIndex).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>s.index.is_lexsorted()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>s.index.is_lexsorted()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>True</code></pre>
+<pre><code>True
+
+&lt;string&gt;:1: FutureWarning: MultiIndex.is_lexsorted is deprecated as a public function, users should use MultiIndex.is_monotonic_increasing instead.</code></pre>
 </div>
 </div>
 <p><strong>46</strong>. Select the labels <code>1</code>, <code>3</code> and <code>6</code> from the second level of the MultiIndexed Series.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>s.loc[:, [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>s.loc[:, [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>A  1    0.138309
-   3    0.612326
-   6    0.528169
-B  1    0.141828
-   3    0.606597
-   6    0.465512
-C  1    0.834213
-   3    0.094689
-   6    0.607716
+<pre><code>A  1    0.116181
+   3    0.656674
+   6    0.129767
+B  1    0.664604
+   3    0.232900
+   6    0.686141
+C  1    0.880935
+   3    0.045384
+   6    0.520549
 dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>47</strong>. Slice the Series <code>s</code>; slice up to label ‘B’ for the first level and from label 5 onwards for the second level.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>s.loc[:<span class="st">"B"</span>, <span class="dv">5</span>:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a>s.loc[:<span class="st">"B"</span>, <span class="dv">5</span>:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>A  5    0.804370
-   6    0.528169
-   7    0.116078
-   8    0.995022
-   9    0.230250
-B  5    0.399337
-   6    0.465512
-   7    0.204560
-   8    0.291415
-   9    0.438684
+<pre><code>A  5    0.822208
+   6    0.129767
+   7    0.686868
+   8    0.729329
+   9    0.867780
+B  5    0.973104
+   6    0.686141
+   7    0.036047
+   8    0.925067
+   9    0.865749
 dtype: float64</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>s.loc[pd.IndexSlice[:<span class="st">'B'</span>, <span class="dv">5</span>:]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb159"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a>s.loc[pd.IndexSlice[:<span class="st">'B'</span>, <span class="dv">5</span>:]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>A  5    0.804370
-   6    0.528169
-   7    0.116078
-   8    0.995022
-   9    0.230250
-B  5    0.399337
-   6    0.465512
-   7    0.204560
-   8    0.291415
-   9    0.438684
+<pre><code>A  5    0.822208
+   6    0.129767
+   7    0.686868
+   8    0.729329
+   9    0.867780
+B  5    0.973104
+   6    0.686141
+   7    0.036047
+   8    0.925067
+   9    0.865749
 dtype: float64</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a>s.loc[<span class="bu">slice</span>(<span class="va">None</span>, <span class="st">'B'</span>), <span class="bu">slice</span>(<span class="dv">5</span>, <span class="va">None</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a>s.loc[<span class="bu">slice</span>(<span class="va">None</span>, <span class="st">'B'</span>), <span class="bu">slice</span>(<span class="dv">5</span>, <span class="va">None</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>A  5    0.804370
-   6    0.528169
-   7    0.116078
-   8    0.995022
-   9    0.230250
-B  5    0.399337
-   6    0.465512
-   7    0.204560
-   8    0.291415
-   9    0.438684
+<pre><code>A  5    0.822208
+   6    0.129767
+   7    0.686868
+   8    0.729329
+   9    0.867780
+B  5    0.973104
+   6    0.686141
+   7    0.036047
+   8    0.925067
+   9    0.865749
 dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>48</strong>. Sum the values in <code>s</code> for each label in the first level (you should have Series giving you a total for labels A, B and C).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb159"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a>s.groupby(level <span class="op">=</span> <span class="dv">0</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>s.groupby(level <span class="op">=</span> <span class="dv">0</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>A    3.930294
-B    4.952445
-C    5.832544
+<pre><code>A    5.114868
+B    5.883438
+C    5.169464
 dtype: float64</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a>s.<span class="bu">sum</span>(level <span class="op">=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a>s.<span class="bu">sum</span>(level <span class="op">=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>A    3.930294
-B    4.952445
-C    5.832544
-dtype: float64</code></pre>
+<pre><code>A    5.114868
+B    5.883438
+C    5.169464
+dtype: float64
+
+&lt;string&gt;:1: FutureWarning: Using the level keyword in DataFrame and Series aggregations is deprecated and will be removed in a future version. Use groupby instead. df.sum(level=1) should use df.groupby(level=1).sum().</code></pre>
 </div>
 </div>
 <p><strong>49</strong>. Suppose that <code>sum()</code> (and other methods) did not accept a <code>level</code> keyword argument. How else could you perform the equivalent of <code>s.sum(level = 0)</code>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>s.unstack().<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>s.unstack().<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>A    3.930294
-B    4.952445
-C    5.832544
+<pre><code>A    5.114868
+B    5.883438
+C    5.169464
 dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>50</strong>. Exchange the levels of the MultiIndex so we have an index of the form (numbers, letters). Is this new Series properly lexsorted? If not, sort it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a>new_s <span class="op">=</span> s.swaplevel(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb165-3"><a href="#cb165-3" aria-hidden="true" tabindex="-1"></a>new_s.index.is_lexsorted()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a>new_s <span class="op">=</span> s.swaplevel(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb169-2"><a href="#cb169-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-3"><a href="#cb169-3" aria-hidden="true" tabindex="-1"></a>new_s.index.is_lexsorted()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>False</code></pre>
+<pre><code>False
+
+&lt;string&gt;:1: FutureWarning: MultiIndex.is_lexsorted is deprecated as a public function, users should use MultiIndex.is_monotonic_increasing instead.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>new_s <span class="op">=</span> new_s.sort_index()</span>
-<span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb167-3"><a href="#cb167-3" aria-hidden="true" tabindex="-1"></a>new_s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb171"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a>new_s <span class="op">=</span> new_s.sort_index()</span>
+<span id="cb171-2"><a href="#cb171-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-3"><a href="#cb171-3" aria-hidden="true" tabindex="-1"></a>new_s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0  A    0.063626
-   B    0.957798
-   C    0.938660
-1  A    0.138309
-   B    0.141828
-   C    0.834213
-2  A    0.422171
-   B    0.471900
-   C    0.779259
-3  A    0.612326
-   B    0.606597
-   C    0.094689
-4  A    0.019972
-   B    0.974814
-   C    0.438100
-5  A    0.804370
-   B    0.399337
-   C    0.861281
-6  A    0.528169
-   B    0.465512
-   C    0.607716
-7  A    0.116078
-   B    0.204560
-   C    0.650294
-8  A    0.995022
-   B    0.291415
-   C    0.300491
-9  A    0.230250
-   B    0.438684
-   C    0.327839
+<pre><code>0  A    0.677786
+   B    0.378729
+   C    0.427958
+1  A    0.116181
+   B    0.664604
+   C    0.880935
+2  A    0.373907
+   B    0.569292
+   C    0.882122
+3  A    0.656674
+   B    0.232900
+   C    0.045384
+4  A    0.054367
+   B    0.551805
+   C    0.980214
+5  A    0.822208
+   B    0.973104
+   C    0.380487
+6  A    0.129767
+   B    0.686141
+   C    0.520549
+7  A    0.686868
+   B    0.036047
+   C    0.349330
+8  A    0.729329
+   B    0.925067
+   C    0.077753
+9  A    0.867780
+   B    0.865749
+   C    0.624733
 dtype: float64</code></pre>
 </div>
 </div>
@@ -1507,19 +1523,19 @@ dtype: float64</code></pre>
 <p>If you’re not familiar with the game, imagine a grid of squares: some of these squares conceal a mine. If you click on a mine, you lose instantly. If you click on a safe square, you reveal a number telling you how many mines are found in the squares that are immediately adjacent. The aim of the game is to uncover all squares in the grid that do not contain a mine.</p>
 <p>In this section, we’ll make a DataFrame that contains the necessary data for a game of Minesweeper: coordinates of the squares, whether the square contains a mine and the number of mines found on adjacent squares.</p>
 <p><strong>51</strong>. Let’s suppose we’re playing Minesweeper on a 5 by 4 grid, i.e.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb169-2"><a href="#cb169-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb173-2"><a href="#cb173-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To begin, generate a DataFrame <code>df</code> with two columns, <code>'x'</code> and <code>'y'</code> containing every coordinate for this grid. That is, the DataFrame should start:</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a>   x  y</span>
-<span id="cb170-2"><a href="#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>  <span class="dv">0</span>  <span class="dv">0</span></span>
-<span id="cb170-3"><a href="#cb170-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  <span class="dv">0</span>  <span class="dv">1</span></span>
-<span id="cb170-4"><a href="#cb170-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="dv">0</span>  <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a>   x  y</span>
+<span id="cb174-2"><a href="#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>  <span class="dv">0</span>  <span class="dv">0</span></span>
+<span id="cb174-3"><a href="#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  <span class="dv">0</span>  <span class="dv">1</span></span>
+<span id="cb174-4"><a href="#cb174-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="dv">0</span>  <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb171"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution</span></span>
-<span id="cb171-2"><a href="#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> product</span>
-<span id="cb171-3"><a href="#cb171-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>,<span class="dv">5</span>)</span>
-<span id="cb171-4"><a href="#cb171-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(product(x, x[:<span class="op">-</span><span class="dv">1</span>]), columns <span class="op">=</span> [<span class="st">"x"</span>, <span class="st">"y"</span>])</span>
-<span id="cb171-5"><a href="#cb171-5" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution</span></span>
+<span id="cb175-2"><a href="#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> product</span>
+<span id="cb175-3"><a href="#cb175-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>,<span class="dv">5</span>)</span>
+<span id="cb175-4"><a href="#cb175-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(product(x, x[:<span class="op">-</span><span class="dv">1</span>]), columns <span class="op">=</span> [<span class="st">"x"</span>, <span class="st">"y"</span>])</span>
+<span id="cb175-5"><a href="#cb175-5" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    x  y
 0   0  0
@@ -1545,13 +1561,13 @@ dtype: float64</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb173"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Answer key solution</span></span>
-<span id="cb173-2"><a href="#cb173-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb173-3"><a href="#cb173-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb173-4"><a href="#cb173-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb173-5"><a href="#cb173-5" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> pd.core.reshape.util.cartesian_product([np.arange(X), np.arange(Y)])</span>
-<span id="cb173-6"><a href="#cb173-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(np.asarray(p).T, columns <span class="op">=</span> [<span class="st">'x'</span>, <span class="st">'y'</span>])</span>
-<span id="cb173-7"><a href="#cb173-7" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb177"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Answer key solution</span></span>
+<span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb177-3"><a href="#cb177-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb177-4"><a href="#cb177-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb177-5"><a href="#cb177-5" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> pd.core.reshape.util.cartesian_product([np.arange(X), np.arange(Y)])</span>
+<span id="cb177-6"><a href="#cb177-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(np.asarray(p).T, columns <span class="op">=</span> [<span class="st">'x'</span>, <span class="st">'y'</span>])</span>
+<span id="cb177-7"><a href="#cb177-7" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    x  y
 0   0  0
@@ -1578,160 +1594,160 @@ dtype: float64</code></pre>
 </div>
 <p><strong>52</strong>. For this DataFrame <code>df</code>, create a new column of zeros (safe) and ones (mine). The probability of a mine occurring at each location should be 0.4.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution</span></span>
-<span id="cb175-2"><a href="#cb175-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"mine"</span>] <span class="op">=</span> np.random.default_rng().choice(<span class="dv">2</span>, <span class="dv">20</span>, p <span class="op">=</span> [<span class="fl">0.6</span>, <span class="fl">0.4</span>])</span>
-<span id="cb175-3"><a href="#cb175-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb179"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution</span></span>
+<span id="cb179-2"><a href="#cb179-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"mine"</span>] <span class="op">=</span> np.random.default_rng().choice(<span class="dv">2</span>, <span class="dv">20</span>, p <span class="op">=</span> [<span class="fl">0.6</span>, <span class="fl">0.4</span>])</span>
+<span id="cb179-3"><a href="#cb179-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    x  y  mine
-0   0  0     0
+0   0  0     1
 1   0  1     0
-2   0  2     1
-3   0  3     1
-4   1  0     0
-5   1  1     1
-6   1  2     0
-7   1  3     1
-8   2  0     1
-9   2  1     1
-10  2  2     0
-11  2  3     0
-12  3  0     0
-13  3  1     1
-14  3  2     0
-15  3  3     1
-16  4  0     1
-17  4  1     1
-18  4  2     1
-19  4  3     1</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb177"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Answer key solution</span></span>
-<span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'mine'</span>] <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, <span class="fl">0.4</span>, X<span class="op">*</span>Y)</span>
-<span id="cb177-3"><a href="#cb177-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    x  y  mine
-0   0  0     0
-1   0  1     1
 2   0  2     0
-3   0  3     0
+3   0  3     1
 4   1  0     1
-5   1  1     0
-6   1  2     0
-7   1  3     1
+5   1  1     1
+6   1  2     1
+7   1  3     0
 8   2  0     1
 9   2  1     0
-10  2  2     0
+10  2  2     1
 11  2  3     1
 12  3  0     0
 13  3  1     0
 14  3  2     1
-15  3  3     0
-16  4  0     0
-17  4  1     1
+15  3  3     1
+16  4  0     1
+17  4  1     0
 18  4  2     0
+19  4  3     0</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb181"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb181-1"><a href="#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Answer key solution</span></span>
+<span id="cb181-2"><a href="#cb181-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'mine'</span>] <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, <span class="fl">0.4</span>, X<span class="op">*</span>Y)</span>
+<span id="cb181-3"><a href="#cb181-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    x  y  mine
+0   0  0     1
+1   0  1     1
+2   0  2     1
+3   0  3     0
+4   1  0     0
+5   1  1     1
+6   1  2     1
+7   1  3     0
+8   2  0     0
+9   2  1     0
+10  2  2     0
+11  2  3     1
+12  3  0     1
+13  3  1     1
+14  3  2     1
+15  3  3     0
+16  4  0     1
+17  4  1     0
+18  4  2     1
 19  4  3     0</code></pre>
 </div>
 </div>
 <p><strong>53</strong>. Now create a new column for this DataFrame called <code>'adjacent'</code>. This column should contain the number of mines found on adjacent squares in the grid.</p>
 <p>(E.g. for the first row, which is the entry for the coordinate <code>(0, 0)</code>, count how many mines are found on the coordinates <code>(0, 1)</code>, <code>(1, 0)</code> and <code>(1, 1)</code>.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb179"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution</span></span>
-<span id="cb179-2"><a href="#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adjacent(x, y):</span>
-<span id="cb179-3"><a href="#cb179-3" aria-hidden="true" tabindex="-1"></a>  d0 <span class="op">=</span> <span class="bu">abs</span>(x[<span class="dv">0</span>] <span class="op">-</span> y[<span class="dv">0</span>])</span>
-<span id="cb179-4"><a href="#cb179-4" aria-hidden="true" tabindex="-1"></a>  d1 <span class="op">=</span> <span class="bu">abs</span>(x[<span class="dv">1</span>] <span class="op">-</span> y[<span class="dv">1</span>])</span>
-<span id="cb179-5"><a href="#cb179-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>((d0, d1) <span class="kw">in</span> ((<span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">1</span>)))</span>
-<span id="cb179-6"><a href="#cb179-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb179-7"><a href="#cb179-7" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(df[<span class="st">"x"</span>], df[<span class="st">"y"</span>]))</span>
-<span id="cb179-8"><a href="#cb179-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb179-9"><a href="#cb179-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"adjacent"</span>] <span class="op">=</span> [df[[adjacent(base_square, candidate_square) <span class="cf">for</span> candidate_square <span class="kw">in</span> squares]][<span class="st">"mine"</span>].<span class="bu">sum</span>() <span class="cf">for</span> base_square <span class="kw">in</span> squares]</span>
-<span id="cb179-10"><a href="#cb179-10" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb183"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution</span></span>
+<span id="cb183-2"><a href="#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adjacent(x, y):</span>
+<span id="cb183-3"><a href="#cb183-3" aria-hidden="true" tabindex="-1"></a>  d0 <span class="op">=</span> <span class="bu">abs</span>(x[<span class="dv">0</span>] <span class="op">-</span> y[<span class="dv">0</span>])</span>
+<span id="cb183-4"><a href="#cb183-4" aria-hidden="true" tabindex="-1"></a>  d1 <span class="op">=</span> <span class="bu">abs</span>(x[<span class="dv">1</span>] <span class="op">-</span> y[<span class="dv">1</span>])</span>
+<span id="cb183-5"><a href="#cb183-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>((d0, d1) <span class="kw">in</span> ((<span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">1</span>)))</span>
+<span id="cb183-6"><a href="#cb183-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-7"><a href="#cb183-7" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(df[<span class="st">"x"</span>], df[<span class="st">"y"</span>]))</span>
+<span id="cb183-8"><a href="#cb183-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-9"><a href="#cb183-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"adjacent"</span>] <span class="op">=</span> [df[[adjacent(base_square, candidate_square) <span class="cf">for</span> candidate_square <span class="kw">in</span> squares]][<span class="st">"mine"</span>].<span class="bu">sum</span>() <span class="cf">for</span> base_square <span class="kw">in</span> squares]</span>
+<span id="cb183-10"><a href="#cb183-10" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    x  y  mine  adjacent
-0   0  0     0         2
-1   0  1     1         1
-2   0  2     0         2
-3   0  3     0         1
-4   1  0     1         2
-5   1  1     0         3
-6   1  2     0         3
-7   1  3     1         1
-8   2  0     1         1
-9   2  1     0         3
-10  2  2     0         3
+0   0  0     1         2
+1   0  1     1         4
+2   0  2     1         3
+3   0  3     0         2
+4   1  0     0         3
+5   1  1     1         4
+6   1  2     1         4
+7   1  3     0         3
+8   2  0     0         3
+9   2  1     0         5
+10  2  2     0         5
 11  2  3     1         2
-12  3  0     0         2
-13  3  1     0         3
-14  3  2     1         2
-15  3  3     0         2
-16  4  0     0         1
-17  4  1     1         1
-18  4  2     0         2
-19  4  3     0         1</code></pre>
+12  3  0     1         2
+13  3  1     1         4
+14  3  2     1         3
+15  3  3     0         3
+16  4  0     1         2
+17  4  1     0         5
+18  4  2     1         2
+19  4  3     0         2</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb181"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb181-1"><a href="#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="co"># answer key solution</span></span>
-<span id="cb181-2"><a href="#cb181-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(<span class="st">"adjacent"</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb181-3"><a href="#cb181-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb181-4"><a href="#cb181-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
-<span id="cb181-5"><a href="#cb181-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb181-6"><a href="#cb181-6" aria-hidden="true" tabindex="-1"></a>mine_grid <span class="op">=</span> df.pivot_table(columns <span class="op">=</span> <span class="st">'x'</span>, index <span class="op">=</span> <span class="st">'y'</span>, values <span class="op">=</span> <span class="st">'mine'</span>)</span>
-<span id="cb181-7"><a href="#cb181-7" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> convolve2d(mine_grid.astype(<span class="bu">complex</span>), np.ones((<span class="dv">3</span>, <span class="dv">3</span>)), mode <span class="op">=</span> <span class="st">'same'</span>).real.astype(<span class="bu">int</span>)</span>
-<span id="cb181-8"><a href="#cb181-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'adjacent'</span>] <span class="op">=</span> np.ravel((counts <span class="op">-</span> mine_grid), <span class="st">'F'</span>)</span>
-<span id="cb181-9"><a href="#cb181-9" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb185"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb185-1"><a href="#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="co"># answer key solution</span></span>
+<span id="cb185-2"><a href="#cb185-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(<span class="st">"adjacent"</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb185-3"><a href="#cb185-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-4"><a href="#cb185-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
+<span id="cb185-5"><a href="#cb185-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-6"><a href="#cb185-6" aria-hidden="true" tabindex="-1"></a>mine_grid <span class="op">=</span> df.pivot_table(columns <span class="op">=</span> <span class="st">'x'</span>, index <span class="op">=</span> <span class="st">'y'</span>, values <span class="op">=</span> <span class="st">'mine'</span>)</span>
+<span id="cb185-7"><a href="#cb185-7" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> convolve2d(mine_grid.astype(<span class="bu">complex</span>), np.ones((<span class="dv">3</span>, <span class="dv">3</span>)), mode <span class="op">=</span> <span class="st">'same'</span>).real.astype(<span class="bu">int</span>)</span>
+<span id="cb185-8"><a href="#cb185-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'adjacent'</span>] <span class="op">=</span> np.ravel((counts <span class="op">-</span> mine_grid), <span class="st">'F'</span>)</span>
+<span id="cb185-9"><a href="#cb185-9" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    x  y  mine  adjacent
-0   0  0     0         2
-1   0  1     1         1
-2   0  2     0         2
-3   0  3     0         1
-4   1  0     1         2
-5   1  1     0         3
-6   1  2     0         3
-7   1  3     1         1
-8   2  0     1         1
-9   2  1     0         3
-10  2  2     0         3
+0   0  0     1         2
+1   0  1     1         4
+2   0  2     1         3
+3   0  3     0         2
+4   1  0     0         3
+5   1  1     1         4
+6   1  2     1         4
+7   1  3     0         3
+8   2  0     0         3
+9   2  1     0         5
+10  2  2     0         5
 11  2  3     1         2
-12  3  0     0         2
-13  3  1     0         3
-14  3  2     1         2
-15  3  3     0         2
-16  4  0     0         1
-17  4  1     1         1
-18  4  2     0         2
-19  4  3     0         1</code></pre>
+12  3  0     1         2
+13  3  1     1         4
+14  3  2     1         3
+15  3  3     0         3
+16  4  0     1         2
+17  4  1     0         5
+18  4  2     1         2
+19  4  3     0         2</code></pre>
 </div>
 </div>
 <p><strong>54</strong>. For rows of the DataFrame that contain a mine, set the value in the <code>'adjacent'</code> column to NaN.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb183"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">"mine"</span>] <span class="op">==</span> <span class="dv">1</span>, <span class="st">"adjacent"</span>] <span class="op">=</span> np.nan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb187"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb187-1"><a href="#cb187-1" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">"mine"</span>] <span class="op">==</span> <span class="dv">1</span>, <span class="st">"adjacent"</span>] <span class="op">=</span> np.nan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>55</strong>. Finally, convert the DataFrame to a grid of the adjacent mine counts: columns are the <code>x</code> coordinate, rows are the <code>y</code> coordinate.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb184-1"><a href="#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution</span></span>
-<span id="cb184-2"><a href="#cb184-2" aria-hidden="true" tabindex="-1"></a>df.pivot_table(columns <span class="op">=</span> <span class="st">"x"</span>, index <span class="op">=</span> <span class="st">"y"</span>, values <span class="op">=</span> <span class="st">"adjacent"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb188"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb188-1"><a href="#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution</span></span>
+<span id="cb188-2"><a href="#cb188-2" aria-hidden="true" tabindex="-1"></a>df.pivot_table(columns <span class="op">=</span> <span class="st">"x"</span>, index <span class="op">=</span> <span class="st">"y"</span>, values <span class="op">=</span> <span class="st">"adjacent"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x    0    1    2    3    4
 y                         
-0  2.0  NaN  NaN  2.0  1.0
-1  NaN  3.0  3.0  3.0  NaN
-2  2.0  3.0  3.0  NaN  2.0
-3  1.0  NaN  NaN  2.0  1.0</code></pre>
+0  NaN  3.0  3.0  NaN  NaN
+1  NaN  NaN  5.0  NaN  5.0
+2  NaN  NaN  5.0  NaN  NaN
+3  2.0  3.0  NaN  3.0  2.0</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb186"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb186-1"><a href="#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Answer key solution</span></span>
-<span id="cb186-2"><a href="#cb186-2" aria-hidden="true" tabindex="-1"></a>df.drop(<span class="st">'mine'</span>, axis <span class="op">=</span> <span class="dv">1</span>).set_index([<span class="st">'y'</span>, <span class="st">'x'</span>]).unstack()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb190"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb190-1"><a href="#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Answer key solution</span></span>
+<span id="cb190-2"><a href="#cb190-2" aria-hidden="true" tabindex="-1"></a>df.drop(<span class="st">'mine'</span>, axis <span class="op">=</span> <span class="dv">1</span>).set_index([<span class="st">'y'</span>, <span class="st">'x'</span>]).unstack()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  adjacent                    
 x        0    1    2    3    4
 y                             
-0      2.0  NaN  NaN  2.0  1.0
-1      NaN  3.0  3.0  3.0  NaN
-2      2.0  3.0  3.0  NaN  2.0
-3      1.0  NaN  NaN  2.0  1.0</code></pre>
+0      NaN  3.0  3.0  NaN  NaN
+1      NaN  NaN  5.0  NaN  5.0
+2      NaN  NaN  5.0  NaN  NaN
+3      2.0  3.0  NaN  3.0  2.0</code></pre>
 </div>
 </div>
 </section>
@@ -1744,22 +1760,22 @@ y
 <p>To really get a good understanding of the data contained in your DataFrame, it is often essential to create plots: if you’re lucky, trends and anomalies will jump right out at you. This functionality is baked into pandas and the puzzles below explore some of what’s possible with the library.</p>
 <p><strong>56.</strong> Pandas is highly integrated with the plotting library matplotlib, and makes plotting DataFrames very user-friendly! Plotting in a notebook environment usually makes use of the following boilerplate:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb188"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb188-1"><a href="#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb188-2"><a href="#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb188-3"><a href="#cb188-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb188-4"><a href="#cb188-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb192"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb192-1"><a href="#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb192-2"><a href="#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb192-3"><a href="#cb192-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-4"><a href="#cb192-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>matplotlib is the plotting library which pandas’ plotting functionality is built upon, and it is usually aliased to <code>plt</code>.</p>
 <p><code>plt.style.use('ggplot')</code> is a style theme that most people find agreeable, based upon the styling of R’s ggplot package.</p>
 <p>For starters, make a scatter plot of this random data, but use black X’s instead of the default markers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb189"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb189-1"><a href="#cb189-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"xs"</span>:[<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">8</span>, <span class="dv">1</span>], <span class="st">"ys"</span>:[<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">6</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb193"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb193-1"><a href="#cb193-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"xs"</span>:[<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">8</span>, <span class="dv">1</span>], <span class="st">"ys"</span>:[<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">6</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Consult the <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.plot.html">documentation</a> if you get stuck!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb190"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb190-1"><a href="#cb190-1" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">'ggplot'</span>)</span>
-<span id="cb190-2"><a href="#cb190-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-3"><a href="#cb190-3" aria-hidden="true" tabindex="-1"></a>df.plot.scatter(x <span class="op">=</span> <span class="st">"xs"</span>, y <span class="op">=</span> <span class="st">"ys"</span>, color <span class="op">=</span> <span class="st">"black"</span>, marker <span class="op">=</span> <span class="st">"x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb194"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb194-1"><a href="#cb194-1" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">'ggplot'</span>)</span>
+<span id="cb194-2"><a href="#cb194-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-3"><a href="#cb194-3" aria-hidden="true" tabindex="-1"></a>df.plot.scatter(x <span class="op">=</span> <span class="st">"xs"</span>, y <span class="op">=</span> <span class="st">"ys"</span>, color <span class="op">=</span> <span class="st">"black"</span>, marker <span class="op">=</span> <span class="st">"x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="100_pandas_puzzles_MY_SOLUTIONS_files/figure-html/unnamed-chunk-83-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1768,12 +1784,12 @@ y
 <p>(Hint: If you’re having trouble seeing the plot, try multiplying the Series which you choose to represent size by 10 or more)</p>
 <p><em>The chart doesn’t have to be pretty: this isn’t a course in data viz!</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb191"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb191-1"><a href="#cb191-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"productivity"</span>:[<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">9</span>],</span>
-<span id="cb191-2"><a href="#cb191-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"hours_in"</span>    :[<span class="dv">1</span>,<span class="dv">9</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">2</span>,<span class="dv">9</span>,<span class="dv">1</span>,<span class="dv">7</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>],</span>
-<span id="cb191-3"><a href="#cb191-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"happiness"</span>   :[<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>],</span>
-<span id="cb191-4"><a href="#cb191-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"caffeinated"</span> :[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>]})</span>
-<span id="cb191-5"><a href="#cb191-5" aria-hidden="true" tabindex="-1"></a>                   </span>
-<span id="cb191-6"><a href="#cb191-6" aria-hidden="true" tabindex="-1"></a>df.plot.scatter(x <span class="op">=</span> <span class="st">"hours_in"</span>, y <span class="op">=</span> <span class="st">"productivity"</span>, s <span class="op">=</span> df.happiness <span class="op">*</span> <span class="dv">30</span>, c <span class="op">=</span> df.caffeinated)                 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb195"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"productivity"</span>:[<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">9</span>],</span>
+<span id="cb195-2"><a href="#cb195-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"hours_in"</span>    :[<span class="dv">1</span>,<span class="dv">9</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">2</span>,<span class="dv">9</span>,<span class="dv">1</span>,<span class="dv">7</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>],</span>
+<span id="cb195-3"><a href="#cb195-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"happiness"</span>   :[<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>],</span>
+<span id="cb195-4"><a href="#cb195-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"caffeinated"</span> :[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>]})</span>
+<span id="cb195-5"><a href="#cb195-5" aria-hidden="true" tabindex="-1"></a>                   </span>
+<span id="cb195-6"><a href="#cb195-6" aria-hidden="true" tabindex="-1"></a>df.plot.scatter(x <span class="op">=</span> <span class="st">"hours_in"</span>, y <span class="op">=</span> <span class="st">"productivity"</span>, s <span class="op">=</span> df.happiness <span class="op">*</span> <span class="dv">30</span>, c <span class="op">=</span> df.caffeinated)                 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="100_pandas_puzzles_MY_SOLUTIONS_files/figure-html/unnamed-chunk-84-3.png" class="img-fluid" width="672"></p>
 </div>
@@ -1781,17 +1797,17 @@ y
 <p><strong>58.</strong> What if we want to plot multiple things? Pandas allows you to pass in a matplotlib <em>Axis</em> object for plots, and plots will also return an Axis object.</p>
 <p>Make a bar plot of monthly revenue with a line plot of monthly advertising spending (numbers in millions)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb192"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb192-1"><a href="#cb192-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"revenue"</span>:[<span class="dv">57</span>,<span class="dv">68</span>,<span class="dv">63</span>,<span class="dv">71</span>,<span class="dv">72</span>,<span class="dv">90</span>,<span class="dv">80</span>,<span class="dv">62</span>,<span class="dv">59</span>,<span class="dv">51</span>,<span class="dv">47</span>,<span class="dv">52</span>],</span>
-<span id="cb192-2"><a href="#cb192-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"advertising"</span>:[<span class="fl">2.1</span>,<span class="fl">1.9</span>,<span class="fl">2.7</span>,<span class="fl">3.0</span>,<span class="fl">3.6</span>,<span class="fl">3.2</span>,<span class="fl">2.7</span>,<span class="fl">2.4</span>,<span class="fl">1.8</span>,<span class="fl">1.6</span>,<span class="fl">1.3</span>,<span class="fl">1.9</span>],</span>
-<span id="cb192-3"><a href="#cb192-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"month"</span>:<span class="bu">range</span>(<span class="dv">12</span>)</span>
-<span id="cb192-4"><a href="#cb192-4" aria-hidden="true" tabindex="-1"></a>                  })</span>
-<span id="cb192-5"><a href="#cb192-5" aria-hidden="true" tabindex="-1"></a>                  </span>
-<span id="cb192-6"><a href="#cb192-6" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> df.plot.bar(<span class="st">"month"</span>, <span class="st">"revenue"</span>, color <span class="op">=</span> <span class="st">"green"</span>) </span>
-<span id="cb192-7"><a href="#cb192-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlim((<span class="op">-</span><span class="dv">1</span>, <span class="dv">12</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb196"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb196-1"><a href="#cb196-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"revenue"</span>:[<span class="dv">57</span>,<span class="dv">68</span>,<span class="dv">63</span>,<span class="dv">71</span>,<span class="dv">72</span>,<span class="dv">90</span>,<span class="dv">80</span>,<span class="dv">62</span>,<span class="dv">59</span>,<span class="dv">51</span>,<span class="dv">47</span>,<span class="dv">52</span>],</span>
+<span id="cb196-2"><a href="#cb196-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"advertising"</span>:[<span class="fl">2.1</span>,<span class="fl">1.9</span>,<span class="fl">2.7</span>,<span class="fl">3.0</span>,<span class="fl">3.6</span>,<span class="fl">3.2</span>,<span class="fl">2.7</span>,<span class="fl">2.4</span>,<span class="fl">1.8</span>,<span class="fl">1.6</span>,<span class="fl">1.3</span>,<span class="fl">1.9</span>],</span>
+<span id="cb196-3"><a href="#cb196-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"month"</span>:<span class="bu">range</span>(<span class="dv">12</span>)</span>
+<span id="cb196-4"><a href="#cb196-4" aria-hidden="true" tabindex="-1"></a>                  })</span>
+<span id="cb196-5"><a href="#cb196-5" aria-hidden="true" tabindex="-1"></a>                  </span>
+<span id="cb196-6"><a href="#cb196-6" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> df.plot.bar(<span class="st">"month"</span>, <span class="st">"revenue"</span>, color <span class="op">=</span> <span class="st">"green"</span>) </span>
+<span id="cb196-7"><a href="#cb196-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlim((<span class="op">-</span><span class="dv">1</span>, <span class="dv">12</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(-1.0, 12.0)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb194"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb194-1"><a href="#cb194-1" aria-hidden="true" tabindex="-1"></a>df.plot.line(<span class="st">"month"</span>, <span class="st">"advertising"</span>, secondary_y <span class="op">=</span> <span class="va">True</span>, ax <span class="op">=</span> ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb198"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb198-1"><a href="#cb198-1" aria-hidden="true" tabindex="-1"></a>df.plot.line(<span class="st">"month"</span>, <span class="st">"advertising"</span>, secondary_y <span class="op">=</span> <span class="va">True</span>, ax <span class="op">=</span> ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="100_pandas_puzzles_MY_SOLUTIONS_files/figure-html/unnamed-chunk-85-5.png" class="img-fluid" width="672"></p>
 </div>
@@ -1807,87 +1823,87 @@ y
 <p>Your first step should be to get the data in the correct format using pandas’ time-series grouping function. We would like each candle to represent an hour’s worth of data. You can write your own aggregation function which returns the open/high/low/close, but pandas has a built-in which also does this.</p>
 <p>The below cell contains helper functions. Call <code>day_stock_data()</code> to generate a DataFrame containing the prices a hypothetical stock sold for, and the time the sale occurred. Call <code>plot_candlestick(df)</code> on your properly aggregated and formatted stock data to print the candlestick chart.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb195"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> float_to_time(x):</span>
-<span id="cb195-2"><a href="#cb195-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">str</span>(<span class="bu">int</span>(x)) <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">int</span>(x<span class="op">%</span><span class="dv">1</span> <span class="op">*</span> <span class="dv">60</span>)).zfill(<span class="dv">2</span>) <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">int</span>(x<span class="op">*</span><span class="dv">60</span> <span class="op">%</span> <span class="dv">1</span> <span class="op">*</span> <span class="dv">60</span>)).zfill(<span class="dv">2</span>)</span>
-<span id="cb195-3"><a href="#cb195-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb195-4"><a href="#cb195-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> day_stock_data():</span>
-<span id="cb195-5"><a href="#cb195-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#NYSE is open from 9:30 to 4:00</span></span>
-<span id="cb195-6"><a href="#cb195-6" aria-hidden="true" tabindex="-1"></a>    time <span class="op">=</span> <span class="fl">9.5</span></span>
-<span id="cb195-7"><a href="#cb195-7" aria-hidden="true" tabindex="-1"></a>    price <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb195-8"><a href="#cb195-8" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> [(float_to_time(time), price)]</span>
-<span id="cb195-9"><a href="#cb195-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> time <span class="op">&lt;</span> <span class="dv">16</span>:</span>
-<span id="cb195-10"><a href="#cb195-10" aria-hidden="true" tabindex="-1"></a>        elapsed <span class="op">=</span> np.random.exponential(<span class="fl">.001</span>)</span>
-<span id="cb195-11"><a href="#cb195-11" aria-hidden="true" tabindex="-1"></a>        time <span class="op">+=</span> elapsed</span>
-<span id="cb195-12"><a href="#cb195-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> time <span class="op">&gt;</span> <span class="dv">16</span>:</span>
-<span id="cb195-13"><a href="#cb195-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
-<span id="cb195-14"><a href="#cb195-14" aria-hidden="true" tabindex="-1"></a>        price_diff <span class="op">=</span> np.random.uniform(<span class="fl">.999</span>, <span class="fl">1.001</span>)</span>
-<span id="cb195-15"><a href="#cb195-15" aria-hidden="true" tabindex="-1"></a>        price <span class="op">*=</span> price_diff</span>
-<span id="cb195-16"><a href="#cb195-16" aria-hidden="true" tabindex="-1"></a>        results.append((float_to_time(time), price))</span>
-<span id="cb195-17"><a href="#cb195-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb195-18"><a href="#cb195-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb195-19"><a href="#cb195-19" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(results, columns <span class="op">=</span> [<span class="st">'time'</span>,<span class="st">'price'</span>])</span>
-<span id="cb195-20"><a href="#cb195-20" aria-hidden="true" tabindex="-1"></a>    df.time <span class="op">=</span> pd.to_datetime(df.time)</span>
-<span id="cb195-21"><a href="#cb195-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb195-22"><a href="#cb195-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb195-23"><a href="#cb195-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Don't read me unless you get stuck!</span></span>
-<span id="cb195-24"><a href="#cb195-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_candlestick(agg):</span>
-<span id="cb195-25"><a href="#cb195-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb195-26"><a href="#cb195-26" aria-hidden="true" tabindex="-1"></a><span class="co">    agg is a DataFrame which has a DatetimeIndex and five columns: ["open", "high", "low", "close", "color"]</span></span>
-<span id="cb195-27"><a href="#cb195-27" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb195-28"><a href="#cb195-28" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb195-29"><a href="#cb195-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> time <span class="kw">in</span> agg.index:</span>
-<span id="cb195-30"><a href="#cb195-30" aria-hidden="true" tabindex="-1"></a>        ax.plot([time.hour] <span class="op">*</span> <span class="dv">2</span>, agg.loc[time, [<span class="st">"high"</span>,<span class="st">"low"</span>]].values, color <span class="op">=</span> <span class="st">"black"</span>)</span>
-<span id="cb195-31"><a href="#cb195-31" aria-hidden="true" tabindex="-1"></a>        ax.plot([time.hour] <span class="op">*</span> <span class="dv">2</span>, agg.loc[time, [<span class="st">"open"</span>,<span class="st">"close"</span>]].values, color <span class="op">=</span> agg.loc[time, <span class="st">"color"</span>], linewidth <span class="op">=</span> <span class="dv">10</span>)</span>
-<span id="cb195-32"><a href="#cb195-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb195-33"><a href="#cb195-33" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim((<span class="dv">8</span>,<span class="dv">16</span>))</span>
-<span id="cb195-34"><a href="#cb195-34" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Price"</span>)</span>
-<span id="cb195-35"><a href="#cb195-35" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Hour"</span>)</span>
-<span id="cb195-36"><a href="#cb195-36" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">"OHLC of Stock Value During Trading Day"</span>)</span>
-<span id="cb195-37"><a href="#cb195-37" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb199"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb199-1"><a href="#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> float_to_time(x):</span>
+<span id="cb199-2"><a href="#cb199-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">str</span>(<span class="bu">int</span>(x)) <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">int</span>(x<span class="op">%</span><span class="dv">1</span> <span class="op">*</span> <span class="dv">60</span>)).zfill(<span class="dv">2</span>) <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">int</span>(x<span class="op">*</span><span class="dv">60</span> <span class="op">%</span> <span class="dv">1</span> <span class="op">*</span> <span class="dv">60</span>)).zfill(<span class="dv">2</span>)</span>
+<span id="cb199-3"><a href="#cb199-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-4"><a href="#cb199-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> day_stock_data():</span>
+<span id="cb199-5"><a href="#cb199-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#NYSE is open from 9:30 to 4:00</span></span>
+<span id="cb199-6"><a href="#cb199-6" aria-hidden="true" tabindex="-1"></a>    time <span class="op">=</span> <span class="fl">9.5</span></span>
+<span id="cb199-7"><a href="#cb199-7" aria-hidden="true" tabindex="-1"></a>    price <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb199-8"><a href="#cb199-8" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> [(float_to_time(time), price)]</span>
+<span id="cb199-9"><a href="#cb199-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> time <span class="op">&lt;</span> <span class="dv">16</span>:</span>
+<span id="cb199-10"><a href="#cb199-10" aria-hidden="true" tabindex="-1"></a>        elapsed <span class="op">=</span> np.random.exponential(<span class="fl">.001</span>)</span>
+<span id="cb199-11"><a href="#cb199-11" aria-hidden="true" tabindex="-1"></a>        time <span class="op">+=</span> elapsed</span>
+<span id="cb199-12"><a href="#cb199-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> time <span class="op">&gt;</span> <span class="dv">16</span>:</span>
+<span id="cb199-13"><a href="#cb199-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb199-14"><a href="#cb199-14" aria-hidden="true" tabindex="-1"></a>        price_diff <span class="op">=</span> np.random.uniform(<span class="fl">.999</span>, <span class="fl">1.001</span>)</span>
+<span id="cb199-15"><a href="#cb199-15" aria-hidden="true" tabindex="-1"></a>        price <span class="op">*=</span> price_diff</span>
+<span id="cb199-16"><a href="#cb199-16" aria-hidden="true" tabindex="-1"></a>        results.append((float_to_time(time), price))</span>
+<span id="cb199-17"><a href="#cb199-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb199-18"><a href="#cb199-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb199-19"><a href="#cb199-19" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(results, columns <span class="op">=</span> [<span class="st">'time'</span>,<span class="st">'price'</span>])</span>
+<span id="cb199-20"><a href="#cb199-20" aria-hidden="true" tabindex="-1"></a>    df.time <span class="op">=</span> pd.to_datetime(df.time)</span>
+<span id="cb199-21"><a href="#cb199-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb199-22"><a href="#cb199-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-23"><a href="#cb199-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Don't read me unless you get stuck!</span></span>
+<span id="cb199-24"><a href="#cb199-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_candlestick(agg):</span>
+<span id="cb199-25"><a href="#cb199-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb199-26"><a href="#cb199-26" aria-hidden="true" tabindex="-1"></a><span class="co">    agg is a DataFrame which has a DatetimeIndex and five columns: ["open", "high", "low", "close", "color"]</span></span>
+<span id="cb199-27"><a href="#cb199-27" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb199-28"><a href="#cb199-28" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb199-29"><a href="#cb199-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> time <span class="kw">in</span> agg.index:</span>
+<span id="cb199-30"><a href="#cb199-30" aria-hidden="true" tabindex="-1"></a>        ax.plot([time.hour] <span class="op">*</span> <span class="dv">2</span>, agg.loc[time, [<span class="st">"high"</span>,<span class="st">"low"</span>]].values, color <span class="op">=</span> <span class="st">"black"</span>)</span>
+<span id="cb199-31"><a href="#cb199-31" aria-hidden="true" tabindex="-1"></a>        ax.plot([time.hour] <span class="op">*</span> <span class="dv">2</span>, agg.loc[time, [<span class="st">"open"</span>,<span class="st">"close"</span>]].values, color <span class="op">=</span> agg.loc[time, <span class="st">"color"</span>], linewidth <span class="op">=</span> <span class="dv">10</span>)</span>
+<span id="cb199-32"><a href="#cb199-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-33"><a href="#cb199-33" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim((<span class="dv">8</span>,<span class="dv">16</span>))</span>
+<span id="cb199-34"><a href="#cb199-34" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Price"</span>)</span>
+<span id="cb199-35"><a href="#cb199-35" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Hour"</span>)</span>
+<span id="cb199-36"><a href="#cb199-36" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">"OHLC of Stock Value During Trading Day"</span>)</span>
+<span id="cb199-37"><a href="#cb199-37" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>59.</strong> Generate a day’s worth of random stock data, and aggregate / reformat it so that it has hourly summaries of the opening, highest, lowest, and closing prices.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb196"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb196-1"><a href="#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Answer key solution</span></span>
-<span id="cb196-2"><a href="#cb196-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> day_stock_data()</span>
-<span id="cb196-3"><a href="#cb196-3" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">"time"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb196-4"><a href="#cb196-4" aria-hidden="true" tabindex="-1"></a>agg <span class="op">=</span> df.resample(<span class="st">"H"</span>).ohlc()</span>
-<span id="cb196-5"><a href="#cb196-5" aria-hidden="true" tabindex="-1"></a>agg.columns <span class="op">=</span> agg.columns.droplevel()</span>
-<span id="cb196-6"><a href="#cb196-6" aria-hidden="true" tabindex="-1"></a>agg[<span class="st">"color"</span>] <span class="op">=</span> (agg.close <span class="op">&gt;</span> agg.<span class="bu">open</span>).<span class="bu">map</span>({<span class="va">True</span>:<span class="st">"green"</span>, <span class="va">False</span>:<span class="st">"red"</span>})</span>
-<span id="cb196-7"><a href="#cb196-7" aria-hidden="true" tabindex="-1"></a>agg.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb200"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb200-1"><a href="#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Answer key solution</span></span>
+<span id="cb200-2"><a href="#cb200-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> day_stock_data()</span>
+<span id="cb200-3"><a href="#cb200-3" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">"time"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb200-4"><a href="#cb200-4" aria-hidden="true" tabindex="-1"></a>agg <span class="op">=</span> df.resample(<span class="st">"H"</span>).ohlc()</span>
+<span id="cb200-5"><a href="#cb200-5" aria-hidden="true" tabindex="-1"></a>agg.columns <span class="op">=</span> agg.columns.droplevel()</span>
+<span id="cb200-6"><a href="#cb200-6" aria-hidden="true" tabindex="-1"></a>agg[<span class="st">"color"</span>] <span class="op">=</span> (agg.close <span class="op">&gt;</span> agg.<span class="bu">open</span>).<span class="bu">map</span>({<span class="va">True</span>:<span class="st">"green"</span>, <span class="va">False</span>:<span class="st">"red"</span>})</span>
+<span id="cb200-7"><a href="#cb200-7" aria-hidden="true" tabindex="-1"></a>agg.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                           open        high        low      close  color
-time                                                                    
-2023-01-10 09:00:00  100.000000  100.092305  98.452005  98.674273    red
-2023-01-10 10:00:00   98.603267  100.708416  97.816417  98.146692    red
-2023-01-10 11:00:00   98.148793   99.412183  96.516326  99.284204  green
-2023-01-10 12:00:00   99.200479   99.740056  96.199835  97.026297    red
-2023-01-10 13:00:00   97.043462   98.456257  96.207720  97.343265  green</code></pre>
+<pre><code>                           open        high        low       close  color
+time                                                                     
+2023-01-11 09:00:00  100.000000  101.236854  99.640398  100.615249  green
+2023-01-11 10:00:00  100.615384  102.200084  99.947597  100.658724  green
+2023-01-11 11:00:00  100.605703  100.832770  99.172337   99.685813    red
+2023-01-11 12:00:00   99.741268   99.834742  96.984502   98.540823    red
+2023-01-11 13:00:00   98.484202  100.725531  98.309882  100.350495  green</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb198"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb198-1"><a href="#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution</span></span>
-<span id="cb198-2"><a href="#cb198-2" aria-hidden="true" tabindex="-1"></a>agg <span class="op">=</span> df.groupby(df.index.hour).price.agg([<span class="st">'first'</span>, <span class="st">'max'</span>, <span class="st">'min'</span>, <span class="st">'last'</span>])</span>
-<span id="cb198-3"><a href="#cb198-3" aria-hidden="true" tabindex="-1"></a>agg.columns <span class="op">=</span> [<span class="st">"open"</span>, <span class="st">"high"</span>, <span class="st">"low"</span>, <span class="st">"close"</span>]</span>
-<span id="cb198-4"><a href="#cb198-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-5"><a href="#cb198-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime <span class="im">as</span> dt</span>
-<span id="cb198-6"><a href="#cb198-6" aria-hidden="true" tabindex="-1"></a>hours <span class="op">=</span> [<span class="st">"09:30AM"</span>] <span class="op">+</span> [dt.time(i).strftime(<span class="st">'%I:%M%p'</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>,<span class="dv">17</span>)]</span>
-<span id="cb198-7"><a href="#cb198-7" aria-hidden="true" tabindex="-1"></a>agg.index <span class="op">=</span> [<span class="st">'</span><span class="sc">{}</span><span class="st"> - </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(hours[i], hours[i<span class="op">+</span><span class="dv">1</span>]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(hours)<span class="op">-</span><span class="dv">1</span>)]</span>
-<span id="cb198-8"><a href="#cb198-8" aria-hidden="true" tabindex="-1"></a>agg.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb202"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb202-1"><a href="#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My solution</span></span>
+<span id="cb202-2"><a href="#cb202-2" aria-hidden="true" tabindex="-1"></a>agg <span class="op">=</span> df.groupby(df.index.hour).price.agg([<span class="st">'first'</span>, <span class="st">'max'</span>, <span class="st">'min'</span>, <span class="st">'last'</span>])</span>
+<span id="cb202-3"><a href="#cb202-3" aria-hidden="true" tabindex="-1"></a>agg.columns <span class="op">=</span> [<span class="st">"open"</span>, <span class="st">"high"</span>, <span class="st">"low"</span>, <span class="st">"close"</span>]</span>
+<span id="cb202-4"><a href="#cb202-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-5"><a href="#cb202-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime <span class="im">as</span> dt</span>
+<span id="cb202-6"><a href="#cb202-6" aria-hidden="true" tabindex="-1"></a>hours <span class="op">=</span> [<span class="st">"09:30AM"</span>] <span class="op">+</span> [dt.time(i).strftime(<span class="st">'%I:%M%p'</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>,<span class="dv">17</span>)]</span>
+<span id="cb202-7"><a href="#cb202-7" aria-hidden="true" tabindex="-1"></a>agg.index <span class="op">=</span> [<span class="st">'</span><span class="sc">{}</span><span class="st"> - </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(hours[i], hours[i<span class="op">+</span><span class="dv">1</span>]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(hours)<span class="op">-</span><span class="dv">1</span>)]</span>
+<span id="cb202-8"><a href="#cb202-8" aria-hidden="true" tabindex="-1"></a>agg.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                         open        high        low      close
-09:30AM - 10:00AM  100.000000  100.092305  98.452005  98.674273
-10:00AM - 11:00AM   98.603267  100.708416  97.816417  98.146692
-11:00AM - 12:00PM   98.148793   99.412183  96.516326  99.284204
-12:00PM - 01:00PM   99.200479   99.740056  96.199835  97.026297
-01:00PM - 02:00PM   97.043462   98.456257  96.207720  97.343265</code></pre>
+<pre><code>                         open        high        low       close
+09:30AM - 10:00AM  100.000000  101.236854  99.640398  100.615249
+10:00AM - 11:00AM  100.615384  102.200084  99.947597  100.658724
+11:00AM - 12:00PM  100.605703  100.832770  99.172337   99.685813
+12:00PM - 01:00PM   99.741268   99.834742  96.984502   98.540823
+01:00PM - 02:00PM   98.484202  100.725531  98.309882  100.350495</code></pre>
 </div>
 </div>
 <p><strong>60.</strong> Now that you have your properly-formatted data, try to plot it yourself as a candlestick chart. Use the <code>plot_candlestick(df)</code> function above, or matplotlib’s <a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html"><code>plot</code> documentation</a> if you get stuck.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb200"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb200-1"><a href="#cb200-1" aria-hidden="true" tabindex="-1"></a>agg[<span class="st">"color"</span>] <span class="op">=</span> (agg.close <span class="op">&gt;</span> agg.<span class="bu">open</span>).<span class="bu">map</span>({<span class="va">True</span>:<span class="st">"green"</span>, <span class="va">False</span>:<span class="st">"red"</span>})</span>
-<span id="cb200-2"><a href="#cb200-2" aria-hidden="true" tabindex="-1"></a>agg.index <span class="op">=</span> pd.to_datetime(hours[:<span class="op">-</span><span class="dv">1</span>])</span>
-<span id="cb200-3"><a href="#cb200-3" aria-hidden="true" tabindex="-1"></a>agg.index.name <span class="op">=</span> <span class="st">"time"</span></span>
-<span id="cb200-4"><a href="#cb200-4" aria-hidden="true" tabindex="-1"></a>plot_candlestick(agg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb204"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb204-1"><a href="#cb204-1" aria-hidden="true" tabindex="-1"></a>agg[<span class="st">"color"</span>] <span class="op">=</span> (agg.close <span class="op">&gt;</span> agg.<span class="bu">open</span>).<span class="bu">map</span>({<span class="va">True</span>:<span class="st">"green"</span>, <span class="va">False</span>:<span class="st">"red"</span>})</span>
+<span id="cb204-2"><a href="#cb204-2" aria-hidden="true" tabindex="-1"></a>agg.index <span class="op">=</span> pd.to_datetime(hours[:<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb204-3"><a href="#cb204-3" aria-hidden="true" tabindex="-1"></a>agg.index.name <span class="op">=</span> <span class="st">"time"</span></span>
+<span id="cb204-4"><a href="#cb204-4" aria-hidden="true" tabindex="-1"></a>plot_candlestick(agg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="100_pandas_puzzles_MY_SOLUTIONS_files/figure-html/unnamed-chunk-89-7.png" class="img-fluid" width="672"></p>
 </div>

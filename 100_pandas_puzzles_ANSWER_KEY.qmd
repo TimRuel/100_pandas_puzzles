@@ -3,7 +3,10 @@ title: "100 pandas puzzles - ANSWER KEY"
 output: html_document
 ---
 
-# 100 pandas puzzles
+```{r include=FALSE}
+library(reticulate)
+use_virtualenv("pandas_puzzles_env", required = TRUE)
+```
 
 Inspired by [100 Numpy exerises](https://github.com/rougier/numpy-100), here are 100* short puzzles for testing your knowledge of [pandas'](http://pandas.pydata.org/) power.
 
@@ -833,7 +836,6 @@ Consult the [documentation](https://pandas.pydata.org/pandas-docs/stable/generat
 
 ```{python}
 import matplotlib.pyplot as plt
-%matplotlib inline
 plt.style.use('ggplot')
 
 df = pd.DataFrame({"xs":[1,5,2,8,1], "ys":[4,2,1,9,6]})

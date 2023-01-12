@@ -5,8 +5,8 @@ output: html_document
 
 ```{r include=FALSE}
 library(reticulate)
+use_virtualenv("pandas_puzzles_env", required = TRUE)
 ```
-
 
 Inspired by [100 Numpy exercises](https://github.com/rougier/numpy-100), here are 100\* short puzzles for testing your knowledge of [pandas'](http://pandas.pydata.org/) power.
 
